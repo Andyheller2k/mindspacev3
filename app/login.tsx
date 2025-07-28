@@ -1,5 +1,4 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import {
@@ -17,8 +16,9 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import api from './api.js';
 
-const API_URL = 'http://172.20.10.12:8080';
+
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -26,26 +26,27 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
-    if (!email.trim() || !password.trim()) {
-      Alert.alert('Error', 'Please enter both email and password.');
-      return;
-    }
+  if (!email.trim() || !password.trim()) {
+    Alert.alert('Error', 'Please enter both email and password.');
+    return;
+  }
 
-    setIsLoading(true);
-    try {
-      const response = await axios.post(`${API_URL}/api/v1/auth/authenticate`, {
-        email,
-        password,
-      });
+  setIsLoading(true);
+  try {
+    const response = await api.post('/api/v1/auth/authenticate', {
+      email,
+      password,
+    });
 
-      await AsyncStorage.setItem('userToken', response.data.token);
-      router.replace('/(tabs)/session');
-    } catch (error) {
-      Alert.alert('Login Failed', 'Incorrect email or password.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    await AsyncStorage.setItem('userToken', response.data.token);
+    router.replace('/(tabs)/session');
+  } catch (error) {
+    Alert.alert('Login Failed', 'Incorrect email or password.');
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <KeyboardAvoidingView

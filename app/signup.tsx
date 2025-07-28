@@ -1,6 +1,5 @@
 // Signup.js (refactored with two-tone layout)
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import {
@@ -19,8 +18,9 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native';
+import api from './api.js';
 
-const API_URL = 'http://10.36.12.105:8080';
+
 const { height } = Dimensions.get('window');
 
 export default function Signup() {
@@ -42,7 +42,7 @@ export default function Signup() {
 
     setIsLoading(true);
     try {
-      const response = await axios.post(`${API_URL}/api/v1/auth/register`, {
+      const response = await api.post(`/api/v1/auth/register`, {
         firstName: name,
         lastName: '',
         email,
