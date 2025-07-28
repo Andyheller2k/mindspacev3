@@ -1,12 +1,19 @@
-// components/Cards.js
 import { useRouter } from 'expo-router';
-import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import {
+  Button,
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import meditationData from '../Meditation';
 import MeditationCard from '../MeditationCards';
 
 const Cards = () => {
-  const router = useRouter(); // ✅ Move useRouter inside component
+  const router = useRouter();
+  const [bgColor, setBgColor] = useState('#ffffff');
 
   const handlePress = (item) => {
     router.push({
@@ -15,7 +22,12 @@ const Cards = () => {
     });
   };
 
-  // Get today's date
+  const changeBackgroundColor = () => {
+    const colors = ['#ffffff', '#f0f8ff', '#e6ffe6', '#fff0f5', '#fef6e4'];
+    const nextColor = colors[Math.floor(Math.random() * colors.length)];
+    setBgColor(nextColor);
+  };
+
   const today = new Date();
   const daySeed = today.getFullYear() + today.getMonth() + today.getDate();
 
@@ -31,48 +43,65 @@ const Cards = () => {
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
     return shuffled.slice(0, 7);
-  })(); // ✅ Immediately invoked
+  })();
 
   return (
-    <FlatList
-      data={getDailyCards}
-      renderItem={({ item, index }) => (
-        <View>
-          <MeditationCard
-            id={item.id} // ✅ ADD THIS - Essential for favorites to work correctly
-            title={item.title}
-            duration={item.duration}
-            image={item.image}
-            description={item.description} // ✅ ADD THIS - Needed by favorites context
-            url={item.url} // ✅ ADD THIS - Needed for sharing functionality
-            onPress={() => handlePress(item)}
-          />
+    <SafeAreaView style={[styles.safeArea, { backgroundColor: bgColor }]}>
+      <View style={styles.buttonContainer}>
+        <Button title="Change Background" onPress={changeBackgroundColor} />
+      </View>
 
-          {index === 2 && (
-            <Text style={styles.belowText}>🌱 Your afternoon lift.</Text>
-          )}
-          {index === 4 && (
-            <Text style={styles.belowText}>✨ At night.</Text>
-          )}
-        </View>
-      )}
-      keyExtractor={(item) => item.id.toString()}
-      horizontal={false}
-      showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{ paddingHorizontal: 16 }}
-    />
+      <FlatList
+        data={getDailyCards}
+        renderItem={({ item, index }) => (
+          <View>
+            <MeditationCard
+              id={item.id}
+              title={item.title}
+              duration={item.duration}
+              image={item.image}
+              description={item.description}
+              url={item.url}
+              onPress={() => handlePress(item)}
+            />
+            {index === 2 && (
+              <Text style={styles.belowText}>🌱 Your afternoon lift.</Text>
+            )}
+            {index === 4 && (
+              <Text style={styles.belowText}>✨ At night.</Text>
+            )}
+          </View>
+        )}
+        keyExtractor={(item) => item.id.toString()}
+        horizontal={false}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.contentContainer}
+      />
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
+  contentContainer: {
+    paddingHorizontal: 16,
+    paddingTop: 16, // spacing from top of screen
+    paddingBottom: 32,
+  },
   belowText: {
-    color: '#fff',
+    color: '#000',
     fontSize: 25,
     fontWeight: '300',
     marginTop: 8,
     marginBottom: 20,
     textAlign: 'left',
     paddingHorizontal: 20,
+  },
+  buttonContainer: {
+    paddingHorizontal: 16,
+    marginBottom: 10,
   },
 });
 

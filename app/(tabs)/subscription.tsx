@@ -1,25 +1,25 @@
 "use client"
 
-import { Ionicons } from "@expo/vector-icons"
+import { Ionicons } from "@expo/vector-icons";
 import type { JSX } from "react"; // Import JSX to fix the undeclared variable error
-import { useState } from "react"
+import { useState } from "react";
 import {
-    ActivityIndicator,
-    Alert,
-    KeyboardAvoidingView,
-    Modal,
-    Platform,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
-} from "react-native"
+  ActivityIndicator,
+  Alert,
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 interface SubscriptionModalProps {
   isOpen: boolean
-  onClose: () => void
+  onClose: () => never
   triggeredByContent?: string
 }
 
@@ -87,7 +87,7 @@ const SubscriptionModal = ({ isOpen, onClose, triggeredByContent }: Subscription
     setIsProcessing(true)
 
     try {
-      // Simulate API call
+      
       await new Promise((resolve) => setTimeout(resolve, 2000))
 
       setIsProcessing(false)

@@ -167,7 +167,7 @@ export default [
     description: 'Let go of stress and tension.',
     duration: '7 min',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/relax.png'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-lullaby-night-531%20(2).mp3',
   },
   {

@@ -19,6 +19,9 @@ const MAPPING = {
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
    'gearshape.fill': 'settings',
+   'sparkle': 'self-improvement',
+  
+   
 } as IconMapping;
 
 /**

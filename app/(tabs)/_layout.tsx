@@ -40,7 +40,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane" color={color} />,
         }}
       /> 
-
+       <Tabs.Screen
+        name="Today"
+        options={{
+          title: 'Mindfullness',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="sparkle" color={color} />,
+        }}
+      />
        
       <Tabs.Screen
         name="SleepStories"
@@ -69,15 +75,7 @@ export default function TabLayout() {
           title: 'Settings',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="gear" color={color} />,
         }}
-      />
-      
-      <Tabs.Screen
-        name="Today"
-        options={{
-          title: 'Today',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="gear" color={color} />,
-        }}
-      />
+      /> 
     </Tabs>
   );
 }
