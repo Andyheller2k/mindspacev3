@@ -1,3 +1,4 @@
+
 export default [
   {
     id: 1,
@@ -5,7 +6,7 @@ export default [
     description: 'Start your day with a calm mind.',
     duration: '2:14 s',
     category: 'Morning',
-    image: require('../assets/images/sleep-awake.png'),
+    image: ('../assets/images/sunny.webp'),
     url: 'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-finding-myself-993.mp3',
   },
   {
@@ -23,7 +24,7 @@ export default [
     description: 'Boost your concentration and productivity.',
     duration: '1:04 s',
     category: 'Focus',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/focus.png'),
     url: 'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-nature-meditation-345.mp3',
   },
   {
@@ -32,7 +33,7 @@ export default [
     description: 'Drift into sleep with soft ambient sounds.',
     duration: '1:43 s',
     category: 'Sleep',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/waving.webp'),
     url: 'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-lullaby-night-531.mp3',
   },
   {
@@ -41,7 +42,7 @@ export default [
     description: 'Let go of stress and tension.',
     duration: '1:41 s',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/stress.webp'),
     url: 'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-island-beat-250.mp3',
   },
   {
@@ -50,7 +51,7 @@ export default [
     description: 'Concentrate Better.',
     duration: '1:48 s',
     category: 'Focus',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/focus.png'),
     url: 'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-relax-beat-292.mp3',
   },
   {
@@ -59,7 +60,7 @@ export default [
     description: 'Release tension.',
     duration: '2:45',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/stressball.png'),
     url: 'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-forest-walk-607.mp3',
   },
   {
@@ -68,7 +69,7 @@ export default [
     description: 'Let go of stress and tension.',
     duration: '2:07 s',
     category: 'Uplifting',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/expert-guide.webp'),
     url: 'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-hazy-after-hours-132.mp3',
   },
   {
@@ -77,7 +78,7 @@ export default [
     description: 'Let go of stress and tension.',
     duration: '1:49 ',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/step.png'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-until-my-last-breath-884.mp3',
   },
   {
@@ -86,7 +87,7 @@ export default [
     description: '.',
     duration: '2:48 s',
     category: 'Meditation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/best.jpg'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-indian-meditations-21.mp3',
   },
   {
@@ -95,7 +96,7 @@ export default [
     description: 'Moonlight Library.',
     duration: '1:50 s',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/night2.gif'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-dreaming-big-31.mp3',
   },
   {
@@ -104,7 +105,7 @@ export default [
     description: 'Consistency is Key.',
     duration: '4:54 s',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/growth.png'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-fallen-asper-565.mp3',
   },
   {
@@ -113,7 +114,7 @@ export default [
     description: 'Pride From the Inside Out.',
     duration: '2:14 s',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/smile.webp'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-finding-myself-993.mp3',
   },
   {
@@ -122,7 +123,7 @@ export default [
     description: 'Let go of stress and tension.',
     duration: '2:54 s',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/night2.gif'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-forest-walk-607.mp3',
   },
   {
@@ -131,7 +132,7 @@ export default [
     description: 'Let go of stress and tension.',
     duration: '2:00 min',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/living.webp'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-harp-relax-669%20(1).mp3',
   },
   {
@@ -140,7 +141,7 @@ export default [
     description: 'Wake Up To A New You.',
     duration: '2:07 s',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/relax.jpg'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-hazy-after-hours-132.mp3',
   },
   {
@@ -149,7 +150,7 @@ export default [
     description: 'Let go of stress and tension.',
     duration: '1:41 s',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/deep breath.webp'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-island-beat-250.mp3',
   },
   {
@@ -158,7 +159,7 @@ export default [
     description: 'Let go of stress and tension.',
     duration: '7 min',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/changing.png'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-island-beat-250.mp3',
   },
   {
@@ -167,7 +168,7 @@ export default [
     description: 'Let go of stress and tension.',
     duration: '7 min',
     category: 'Relaxation',
-    image: require('../assets/images/relax.png'),
+    image: require('../assets/images/New.png'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-lullaby-night-531%20(2).mp3',
   },
   {
@@ -176,7 +177,7 @@ export default [
     description: 'Let go of stress and tension.',
     duration: '7 min',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/Calm.webp'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-music-and-life-852.mp3',
   },
   {
@@ -185,7 +186,7 @@ export default [
     description: 'Let go of stress and tension.',
     duration: '7 min',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/workout.webp'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-nap-time-340.mp3',
   },
   {
@@ -194,7 +195,7 @@ export default [
     description: 'Let go of stress and tension.',
     duration: '7 min',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/Calm.webp'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-nature-meditation-345.mp3',
   },
   {
@@ -203,7 +204,7 @@ export default [
     description: 'Let go of stress and tension.',
     duration: '7 min',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/light.png'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-ode-to-loneliness-520.mp3',
   },
   {
@@ -212,7 +213,7 @@ export default [
     description: 'Let go of stress and tension.',
     duration: '7 min',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/ponder.gif'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-pondering-383.mp3',
   },
   {
@@ -221,7 +222,7 @@ export default [
     description: 'Let go of stress and tension.',
     duration: '7 min',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/relax.jpg'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-relax-658.mp3',
   },
   {
@@ -230,7 +231,7 @@ export default [
     description: 'Let go of stress and tension.',
     duration: '7 min',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/grif.png'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-relax-beat-292.mp3',
   },
   {
@@ -239,7 +240,7 @@ export default [
     description: '.',
     duration: '7 min',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/thumbnail.jpg'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-until-my-last-breath-884.mp3',
   },
   {
@@ -248,7 +249,7 @@ export default [
     description: 'Let go of stress and tension.',
     duration: '7 min',
     category: 'Relaxation',
-    image: require('../assets/images/sleep-awake.png'),
+    image: require('../assets/images/unnamed.jpg'),
     url:'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-lullaby-night-531%20(2).mp3',
   },
 ];
