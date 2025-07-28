@@ -1,110 +1,332 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import {
+    Alert,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from 'react-native';
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+interface FeatureTileProps {
+  title: string;
+  color: string;
+  onPress: () => void;
+  isLong?: boolean;
+}
 
-export default function TabTwoScreen() {
+const FeatureTile: React.FC<FeatureTileProps> = ({ title, color, onPress, isLong = false }) => (
+  <TouchableOpacity 
+    style={[
+      isLong ? styles.longTile : styles.tile, 
+      { backgroundColor: color }
+    ]} 
+    activeOpacity={0.8}
+    onPress={onPress}
+  >
+    <Text style={[styles.tileText, isLong && styles.boldText]}>{title}</Text>
+  </TouchableOpacity>
+);
+
+export default function ExploreScreen(): JSX.Element {
+  const [searchText, setSearchText] = useState<string>('');
+  const [activeTab, setActiveTab] = useState<string>('Explore');
+
+  const handleFeaturePress = (feature: string) => {
+    Alert.alert('Feature', `${feature} feature coming soon!`);
+  };
+
+  const handleTrialPress = () => {
+    Alert.alert(
+      'Free Trial', 
+      'Start your 7-day free trial to unlock premium features!',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Start Trial', onPress: () => console.log('Trial started') }
+      ]
+    );
+  };
+
+  const handleNavPress = (tab: string) => {
+    setActiveTab(tab);
+    // Add navigation logic here
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
+    <SafeAreaView style={styles.safeArea}>
+      <StatusBar barStyle="light-content" backgroundColor="#1e1f2f" />
+      
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Explore</Text>
+        <TouchableOpacity>
+          <Ionicons name="person-circle-outline" size={32} color="#fff" />
+        </TouchableOpacity>
+        
+      </View>
+
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        {/* Search Bar */}
+        <View style={styles.searchContainer}>
+          <Ionicons name="search" size={20} color="#ccc" style={styles.searchIcon} />
+          <TextInput 
+            style={styles.searchBar} 
+            placeholder="Search Mindspace" 
+            placeholderTextColor="#ccc"
+            value={searchText}
+            onChangeText={setSearchText}
+          />
+          {searchText.length > 0 && (
+            <TouchableOpacity onPress={() => setSearchText('')}>
+              <Ionicons name="close-circle" size={20} color="#ccc" />
+            </TouchableOpacity>
+          )}
+        </View>
+        
+        {/* Main Feature Tiles */}
+        <View style={styles.row}>
+          <FeatureTile 
+            title="Meditate" 
+            color="#f4a261" 
+            onPress={() => handleFeaturePress('Meditate')}
+          />
+          <FeatureTile 
+            title="Sleep" 
+            color="#6c5ce7" 
+            onPress={() => handleFeaturePress('Sleep')}
+          />
+        </View>
+        
+        <View style={styles.row}>
+          <FeatureTile 
+            title="Move" 
+            color="#d291bc" 
+            onPress={() => handleFeaturePress('Move')}
+          />
+          <FeatureTile 
+            title="Music" 
+            color="#00b4d8" 
+            onPress={() => handleFeaturePress('Music')}
+          />
+        </View>
+        
+        {/* Podcasts Section */}
+        <FeatureTile 
+          title="Podcasts" 
+          color="#f6c90e" 
+          onPress={() => handleFeaturePress('Podcasts')}
+          isLong={true}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+        
+        {/* Premium Library Section */}
+        <View style={styles.bookshelf}>
+          <Ionicons name="library-outline" size={32} color="#fff" style={styles.libraryIcon} />
+          <Text style={styles.libraryText}>Unlock the Mindspace Library</Text>
+          <Text style={styles.librarySubtext}>
+            Access 1000+ guided meditations, sleep stories, and exclusive content
+          </Text>
+          <TouchableOpacity style={styles.trialButton} activeOpacity={0.8} onPress={handleTrialPress}>
+            <Text style={styles.trialText}>Start My Free Trial</Text>
+          </TouchableOpacity>
+          <Text style={styles.trialNote}>7 days free, then $12.99/month</Text>
+        </View>
+        
+        {/* Additional Features */}
+        <FeatureTile 
+          title="Ask Mindspace" 
+          color="#f4a261" 
+          onPress={() => handleFeaturePress('Ask Mindspace')}
+          isLong={true}
+        />
+        
+        <FeatureTile 
+          title="Kids & Family" 
+          color="#a29bfe" 
+          onPress={() => handleFeaturePress('Kids & Family')}
+          isLong={true}
+        />
+        
+        <FeatureTile 
+          title="Videos and More" 
+          color="#6c757d" 
+          onPress={() => handleFeaturePress('Videos and More')}
+          isLong={true}
+        />
+        
+        {/* Bottom Navigation */}
+        <View style={styles.navbar}>
+          {['Today', 'Explore', 'Profile'].map((tab) => (
+            <TouchableOpacity key={tab} onPress={() => handleNavPress(tab)}>
+              <Text style={[
+                styles.navItem, 
+                activeTab === tab && styles.selectedNav
+              ]}>
+                {tab}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#1e1f2f',
   },
-  titleContainer: {
+  header: {
     flexDirection: 'row',
-    gap: 8,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+  },
+  headerTitle: {
+    color: '#fff',
+    fontSize: 28,
+    fontWeight: '700',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#1e1f2f',
+    paddingHorizontal: 16,
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#2c2d3c',
+    borderRadius: 12,
+    marginBottom: 20,
+    paddingHorizontal: 12,
+  },
+  searchIcon: {
+    marginRight: 8,
+  },
+  searchBar: {
+    flex: 1,
+    color: '#fff',
+    padding: 12,
+    fontSize: 16,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 12,
+  },
+  tile: {
+    flex: 0.48,
+    height: 80,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  tileText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  boldText: {
+    fontWeight: '700',
+    fontSize: 18,
+  },
+  longTile: {
+    height: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 16,
+    marginBottom: 12,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  bookshelf: {
+    backgroundColor: '#2d2e3e',
+    padding: 24,
+    borderRadius: 16,
+    marginBottom: 12,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#3a3b4c',
+  },
+  libraryIcon: {
+    marginBottom: 12,
+  },
+  libraryText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  librarySubtext: {
+    color: '#ccc',
+    fontSize: 14,
+    textAlign: 'center',
+    marginBottom: 16,
+    lineHeight: 20,
+  },
+  trialButton: {
+    backgroundColor: '#3a0ca3',
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 25,
+    shadowColor: '#3a0ca3',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 6,
+    marginBottom: 8,
+  },
+  trialText: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 16,
+  },
+  trialNote: {
+    color: '#aaa',
+    fontSize: 12,
+    textAlign: 'center',
+  },
+  navbar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: '#121212',
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    borderTopWidth: 1,
+    borderColor: '#333',
+    marginTop: 20,
+    borderRadius: 12,
+  },
+  navItem: {
+    color: '#888',
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  selectedNav: {
+    color: '#fff',
+    fontWeight: '700',
   },
 });
