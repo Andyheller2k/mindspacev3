@@ -20,7 +20,7 @@ import {
   View
 } from 'react-native';
 
-const API_URL = 'http://172.20.10.12:8080';
+const API_URL = 'http://10.36.12.105:8080';
 const { height } = Dimensions.get('window');
 
 export default function Signup() {

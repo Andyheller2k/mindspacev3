@@ -1,15 +1,15 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
-    Alert,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View
+  Alert,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
 } from 'react-native';
 
 interface FeatureTileProps {
@@ -53,12 +53,13 @@ export default function ExploreScreen(): JSX.Element {
 
   const handleNavPress = (tab: string) => {
     setActiveTab(tab);
-    // Add navigation logic here
+    
   };
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" backgroundColor="#1e1f2f" />
+      <StatusBar barStyle="light-content" backgroundColor="#FFFFFF
+" />
       
       {/* Header */}
       <View style={styles.header}>
@@ -178,7 +179,7 @@ export default function ExploreScreen(): JSX.Element {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#1e1f2f',
+    backgroundColor: '#F5F3FF',
   },
   header: {
     flexDirection: 'row',
@@ -188,13 +189,13 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   },
   headerTitle: {
-    color: '#fff',
+    color: '#000',
     fontSize: 28,
     fontWeight: '700',
   },
   container: {
     flex: 1,
-    backgroundColor: '#1e1f2f',
+    backgroundColor: '#F5F3FF',
     paddingHorizontal: 16,
   },
   searchContainer: {

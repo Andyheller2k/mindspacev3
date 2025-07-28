@@ -109,7 +109,7 @@ export default function ProfileScreen() {
     }
 
     const response = await axios.post(
-      'http://172.20.10.12:8080/api/user/profile',
+      'http://10.36.12.105:8080/api/user/profile',
       {
         avatarIndex: selectedAvatar,
         name,

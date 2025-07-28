@@ -8,24 +8,22 @@ export default function SettingsScreen() {
   const router = useRouter();
 
   const settings = [
+    { label: 'Profile', icon: 'person.crop.circle', onPress: () => router.push('/profile') },
     { label: 'Account', icon: 'paperplane.fill', onPress: () => {} },
     { label: 'Notifications', icon: 'chevron.right', onPress: () => {} },
     { label: 'Privacy & Security', icon: 'chevron.left.forwardslash.chevron.right', onPress: () => {} },
     { label: 'About', icon: 'house.fill', onPress: () => router.push('/about') },
-    { label: 'Logout', icon: 'gearshape.fill', onPress: () => {router.replace('/welcome')} },
+    { label: 'Logout', icon: 'gearshape.fill', onPress: () => { router.replace('/welcome') } },
   ];
 
   return (
-    <LinearGradient
-      colors={['#0f172a', '#facc15']} // deep blue to yellow
-      style={styles.container}
-    >
+    <LinearGradient colors={['#D0F0FD', '#F5F3FF']} style={styles.container}>
       <SafeAreaView style={{ flex: 1 }}>
         <Text style={styles.header}>Settings</Text>
         <ScrollView contentContainerStyle={styles.scroll}>
           {settings.map((item, index) => (
             <TouchableOpacity key={index} style={styles.item} onPress={item.onPress}>
-              <IconSymbol name={item.icon as any} size={24} color="#fff" />
+              <IconSymbol name={item.icon as any} size={24} color="#B3E5FC" />
               <Text style={styles.label}>{item.label}</Text>
             </TouchableOpacity>
           ))}
@@ -45,7 +43,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 32,
     fontWeight: '700',
-    color: '#fff',
+    color: '#000',
     paddingTop: 40,
     paddingHorizontal: 20,
     marginBottom: 20,
@@ -59,7 +57,7 @@ const styles = StyleSheet.create({
     borderRadius: 14,
   },
   label: {
-    color: '#fff',
+    color: '#B3E5FC',
     fontSize: 18,
     marginLeft: 12,
     fontWeight: '500',

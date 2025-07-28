@@ -23,31 +23,31 @@ type ViewType = 'sessions' | 'timer' | 'custom';
 type TimerState = 'idle' | 'running' | 'paused' | 'completed';
 
 const sessions: Session[] = [
-  { 
-    id: '1', 
-    name: 'Quick Relax', 
-    duration: 5, 
+  {
+    id: '1',
+    name: 'Quick Relax',
+    duration: 5,
     category: 'Relaxation',
     description: 'A short relaxation session to reset your mind'
   },
-  { 
-    id: '2', 
-    name: 'Morning Calm', 
-    duration: 10, 
+  {
+    id: '2',
+    name: 'Morning Calm',
+    duration: 10,
     category: 'Morning',
     description: 'Start your day with peaceful mindfulness'
   },
-  { 
-    id: '3', 
-    name: 'Deep Focus', 
-    duration: 15, 
+  {
+    id: '3',
+    name: 'Deep Focus',
+    duration: 15,
     category: 'Focus',
     description: 'Enhance concentration and mental clarity'
   },
-  { 
-    id: '4', 
-    name: 'Sleep Preparation', 
-    duration: 20, 
+  {
+    id: '4',
+    name: 'Sleep Preparation',
+    duration: 20,
     category: 'Sleep',
     description: 'Wind down and prepare for restful sleep'
   },
@@ -59,7 +59,7 @@ export default function MeditationTimerEnhanced(): JSX.Element {
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [selectedDuration, setSelectedDuration] = useState<number>(10);
   const [currentSession, setCurrentSession] = useState<Session | null>(null);
-  
+
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -159,7 +159,7 @@ export default function MeditationTimerEnhanced(): JSX.Element {
       ]}>
         <Text style={styles.timerText}>{formatTime(timeLeft)}</Text>
         <Text style={styles.timerStatus}>
-          {timerState === 'running' ? 'Meditating...' : 
+          {timerState === 'running' ? 'Meditating...' :
            timerState === 'paused' ? 'Paused' :
            timerState === 'completed' ? 'Complete!' : 'Ready'}
         </Text>
@@ -187,8 +187,8 @@ export default function MeditationTimerEnhanced(): JSX.Element {
       <Text style={styles.customSubtitle}>Select duration for your meditation</Text>
       <View style={styles.durationSelector}>
         {[5, 10, 15, 20, 30].map((duration) => (
-          <TouchableOpacity 
-            key={duration} 
+          <TouchableOpacity
+            key={duration}
             style={[
               styles.durationButton,
               selectedDuration === duration && styles.selectedDurationButton
@@ -213,6 +213,7 @@ export default function MeditationTimerEnhanced(): JSX.Element {
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="dark-content" backgroundColor="#F5F3FF" />
+
       <View style={styles.container}>
         {/* Header */}
         <View style={styles.header}>
@@ -220,14 +221,14 @@ export default function MeditationTimerEnhanced(): JSX.Element {
             <Ionicons name="arrow-back" size={24} color="#4F46E5" />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Meditation</Text>
-          
+
         </View>
 
         {/* Toggle Tabs */}
         <View style={styles.toggleHeader}>
           {(['sessions', 'timer', 'custom'] as ViewType[]).map((label) => (
-            <TouchableOpacity 
-              key={label} 
+            <TouchableOpacity
+              key={label}
               onPress={() => setView(label)}
               style={[
                 styles.toggleButton,
