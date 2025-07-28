@@ -30,50 +30,50 @@ export default function TabLayout() {
         name="session"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house" color={color} />,
+          tabBarIcon: ({ color }) => <IconSymbol size={35} name="house" color={color} />,
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
           title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane" color={color} />,
+          tabBarIcon: ({ color }) => <IconSymbol size={35} name="paperplane" color={color} />,
         }}
       /> 
        <Tabs.Screen
         name="Today"
         options={{
-          title: 'Mindfullness',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="sparkle" color={color} />,
+          title: 'Eco',
+          tabBarIcon: ({ color }) => <IconSymbol size={35} name="sparkle" color={color} />,
         }}
       />
        
       <Tabs.Screen
         name="SleepStories"
         options={{
-          title: 'Sleep Stories',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="person" color={color} />,
+          title: 'Stories',
+          tabBarIcon: ({ color }) => <IconSymbol size={35} name="person" color={color} />,
         }}
       />
       <Tabs.Screen
         name="mindfulcoursses"
         options={{
           title: 'Mindfulness Courses',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="book" color={color} />,
+          tabBarIcon: ({ color }) => <IconSymbol size={35} name="book" color={color} />,
         }}
       />
       <Tabs.Screen
         name="subscription"
         options={{
           title: 'Subscription',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="creditcard" color={color} />,
+          tabBarIcon: ({ color }) => <IconSymbol size={35} name="creditcard" color={color} />,
         }}
       />
       <Tabs.Screen
         name="Settings"
         options={{
           title: 'Settings',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="gear" color={color} />,
+          tabBarIcon: ({ color }) => <IconSymbol size={35} name="gear" color={color} />,
         }}
       /> 
     </Tabs>

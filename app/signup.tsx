@@ -108,7 +108,7 @@ export default function Signup() {
 const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
-    backgroundColor: '#001F54',
+    backgroundColor: '#000033',
   },
   topSection: {
     backgroundColor: '#FFD700',
@@ -118,10 +118,11 @@ const styles = StyleSheet.create({
     paddingVertical: 40,
   },
   image: {
-    height: 180,
-    width: 180,
+    height: 250,
+    width: 250,
     resizeMode: 'contain',
-    marginBottom: 10,
+    marginBottom: 20,
+    marginTop:20,
   },
   welcomeText: {
     fontSize: 36,
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
   },
   bottomSection: {
     padding: 20,
-    backgroundColor: '#001F54',
+    backgroundColor: '#000033',
     flex: 1,
   },
   title: {

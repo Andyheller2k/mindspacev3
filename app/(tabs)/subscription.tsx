@@ -19,7 +19,7 @@ import {
 
 interface SubscriptionModalProps {
   isOpen: boolean
-  onClose: () => never
+  onClose: () => false
   triggeredByContent?: string
 }
 
@@ -194,7 +194,7 @@ const SubscriptionModal = ({ isOpen, onClose, triggeredByContent }: Subscription
 
             {/* Triggered Content */}
             {triggeredByContent && (
-              <View style={styles.triggerCard}>
+              <View style={styles.triggerCard}>Close
                 <Text style={styles.triggerText}>
                   Get unlimited access to {triggeredByContent} and 1000+ more premium content
                 </Text>

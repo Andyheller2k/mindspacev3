@@ -113,9 +113,10 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 40,
   },
   image: {
-    height: 200,
-    width: 200,
+    height: 250,
+    width: 250,
     marginBottom: 10,
+    marginTop: 20,
   },
   welcomeText: {
     fontSize: 40,
