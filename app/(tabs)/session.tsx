@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface Session {
   id: string;
@@ -54,6 +55,7 @@ const sessions: Session[] = [
 ];
 
 export default function MeditationTimerEnhanced(): JSX.Element {
+  const insets = useSafeAreaInsets();
   const [view, setView] = useState<ViewType>('sessions');
   const [timerState, setTimerState] = useState<TimerState>('idle');
   const [timeLeft, setTimeLeft] = useState<number>(0);
@@ -214,7 +216,7 @@ export default function MeditationTimerEnhanced(): JSX.Element {
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="dark-content" backgroundColor="#F5F3FF" />
 
-      <View style={styles.container}>
+       <View style={[styles.safeArea, { paddingTop: insets.top }]}>
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => setView('sessions')}>

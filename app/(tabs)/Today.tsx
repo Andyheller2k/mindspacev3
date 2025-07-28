@@ -1,17 +1,18 @@
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
-  Button,
   FlatList,
   SafeAreaView,
   StyleSheet,
   Text,
-  View,
+  View
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import meditationData from '../Meditation';
 import MeditationCard from '../MeditationCards';
 
 const Cards = () => {
+  const insets = useSafeAreaInsets();
   const router = useRouter();
   const [bgColor, setBgColor] = useState('#ffffff');
 
@@ -22,11 +23,7 @@ const Cards = () => {
     });
   };
 
-  const changeBackgroundColor = () => {
-    const colors = ['#ffffff', '#f0f8ff', '#e6ffe6', '#fff0f5', '#fef6e4'];
-    const nextColor = colors[Math.floor(Math.random() * colors.length)];
-    setBgColor(nextColor);
-  };
+ 
 
   const today = new Date();
   const daySeed = today.getFullYear() + today.getMonth() + today.getDate();
@@ -47,8 +44,8 @@ const Cards = () => {
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: bgColor }]}>
-      <View style={styles.buttonContainer}>
-        <Button title="Change Background" onPress={changeBackgroundColor} />
+       <View style={[styles.safeArea, { paddingTop: insets.top }]}>
+      
       </View>
 
       <FlatList

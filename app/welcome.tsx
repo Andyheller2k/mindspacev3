@@ -4,21 +4,22 @@ import { useRouter } from 'expo-router';
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import {
-    Alert,
-    Animated,
-    Dimensions,
-    Easing,
-    KeyboardAvoidingView,
-    Linking,
-    Platform,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  Alert,
+  Animated,
+  Dimensions,
+  Easing,
+  KeyboardAvoidingView,
+  Linking,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
+
 
 
 
@@ -64,6 +65,8 @@ const CustomLinearGradient: React.FC<CustomLinearGradientProps> = ({ colors, sty
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onCreateAccount, onLogin, onSkip }) => {
     const router = useRouter();
+
+
     const [isChecked, setChecked] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -298,7 +301,7 @@ const handleLogin = (): void => {
               ]}
             >
               <View style={styles.logoCircle}>
-                <Ionicons name="leaf" size={40} color="#0B0B36" />
+                
               </View>
               <Text style={styles.logoText}>Mindspace</Text>
             </Animated.View>
@@ -314,7 +317,7 @@ const handleLogin = (): void => {
               ]}
             >
               <View style={styles.illustrationCircle}>
-                <Ionicons name="person-outline" size={80} color="#0B0B36" />
+                <Ionicons name="leaf" size={80} color="#0B0B36" />
                 <View style={styles.meditationRings}>
                   <Animated.View style={[styles.ring, styles.ring1, { transform: [{ rotate: ring1Rotation }] }]} />
                   <Animated.View style={[styles.ring, styles.ring2, { transform: [{ rotate: ring2Rotation }] }]} />

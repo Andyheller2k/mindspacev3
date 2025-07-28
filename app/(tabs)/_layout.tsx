@@ -1,11 +1,10 @@
+import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
 
 import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabLayout() {
@@ -14,68 +13,80 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
-          ios: {
-            
-            position: 'absolute',
-          },
+          ios: { position: 'absolute' },
           default: {},
         }),
-      }}>
+        tabBarActiveTintColor: '#007AFF',
+        tabBarInactiveTintColor: '#000',
+      }}
+    >
       <Tabs.Screen
         name="session"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={35} name="house" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="home-outline" size={28} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
           title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={35} name="paperplane" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="paper-plane-outline" size={28} color={color} />
+          ),
         }}
-      /> 
-       <Tabs.Screen
+      />
+      <Tabs.Screen
         name="Today"
         options={{
           title: 'Eco',
-          tabBarIcon: ({ color }) => <IconSymbol size={35} name="sparkle" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="sparkles-outline" size={28} color={color} />
+          ),
         }}
       />
-       
       <Tabs.Screen
         name="SleepStories"
         options={{
           title: 'Stories',
-          tabBarIcon: ({ color }) => <IconSymbol size={35} name="person" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="person-outline" size={28} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="mindfulcoursses"
         options={{
-          title: 'Mindfulness Courses',
-          tabBarIcon: ({ color }) => <IconSymbol size={35} name="book" color={color} />,
+          title: 'Mindfulness',
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="book-outline" size={28} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="subscription"
         options={{
           title: 'Subscription',
-          tabBarIcon: ({ color }) => <IconSymbol size={35} name="creditcard" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="card-outline" size={28} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="Settings"
         options={{
           title: 'Settings',
-          tabBarIcon: ({ color }) => <IconSymbol size={35} name="gear" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="settings-outline" size={28} color={color} />
+          ),
         }}
-      /> 
+      />
     </Tabs>
   );
 }

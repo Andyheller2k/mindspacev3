@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
   Alert,
-  SafeAreaView,
+
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface FeatureTileProps {
   title: string;
@@ -33,6 +34,7 @@ const FeatureTile: React.FC<FeatureTileProps> = ({ title, color, onPress, isLong
 );
 
 export default function ExploreScreen(): JSX.Element {
+  const insets = useSafeAreaInsets();
   const [searchText, setSearchText] = useState<string>('');
   const [activeTab, setActiveTab] = useState<string>('Explore');
 
@@ -57,7 +59,8 @@ export default function ExploreScreen(): JSX.Element {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    
+<SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
       <StatusBar barStyle="light-content" backgroundColor="#FFFFFF
 " />
       

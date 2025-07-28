@@ -1,15 +1,16 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
-    Alert,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View
+  Alert,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface SleepStory {
   id: string;
@@ -115,6 +116,7 @@ const ambientSounds: AmbientSound[] = [
 ];
 
 export default function SleepStoriesScreen(): JSX.Element {
+  const insets = useSafeAreaInsets();
   const [favorites, setFavorites] = useState<string[]>([]);
   const [playingStory, setPlayingStory] = useState<string | null>(null);
   const [playingSound, setPlayingSound] = useState<string | null>(null);
@@ -296,7 +298,7 @@ export default function SleepStoriesScreen(): JSX.Element {
       <StatusBar barStyle="dark-content" backgroundColor="#f3f4f6" />
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         {/* Header */}
-        <View style={styles.header}>
+          <View style={[styles.safeArea, { paddingTop: insets.top }]}>
           <Text style={styles.title}>Sleep Stories & Sounds</Text>
           <Text style={styles.subtitle}>Drift off to sleep with relaxing stories and sounds</Text>
         </View>

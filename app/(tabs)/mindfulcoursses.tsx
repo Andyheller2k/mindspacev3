@@ -1,15 +1,16 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
-    Alert,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View
+  Alert,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface Course {
   id: string;
@@ -124,6 +125,7 @@ const courses: Course[] = [
 ];
 
 export default function MindfulnessCourses(): JSX.Element {
+  const insets = useSafeAreaInsets();
   const [enrolledCourses, setEnrolledCourses] = useState<string[]>([]);
 
   const handleCoursePress = (course: Course) => {
@@ -258,7 +260,7 @@ export default function MindfulnessCourses(): JSX.Element {
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View style={styles.header}>
+         <View style={[styles.safeArea, { paddingTop: insets.top }]}>
           <Text style={styles.subtitle}>Easy-To-Learn</Text>
           <Text style={styles.title}>Mindfulness Courses</Text>
           <Text style={styles.headerDescription}>
@@ -312,12 +314,12 @@ const styles = StyleSheet.create({
     color: '#F2994A',
     fontSize: 16,
     fontWeight: '500',
-    marginBottom: 4,
+    marginBottom: 7,
   },
   title: {
     fontWeight: '700',
     fontSize: 28,
-    marginBottom: 8,
+    marginBottom: 7,
     color: '#1F2937',
   },
   headerDescription: {

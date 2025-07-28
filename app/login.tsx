@@ -91,8 +91,7 @@ export default function Login() {
               </TouchableOpacity>
             )}
 
-            <Text style={styles.switchText}>
-              Don't have an Account?{' '}
+            <Text style={styles.switchText}>Don&apos;t have an Account?{' '}
               <Text style={styles.link} onPress={() => router.replace('/signup')}>Sign up</Text>
             </Text>
           </View>
