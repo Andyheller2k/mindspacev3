@@ -29,7 +29,7 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => (
-            <Ionicons name="home-outline" size={28} color={color} />
+            <Ionicons name="home" size={28} color={color} />
           ),
         }}
       />
@@ -38,7 +38,7 @@ export default function TabLayout() {
         options={{
           title: 'Explore',
           tabBarIcon: ({ color }) => (
-            <Ionicons name="paper-plane-outline" size={28} color={color} />
+            <Ionicons name="paper-plane" size={28} color={color} />
           ),
         }}
       />
@@ -47,7 +47,7 @@ export default function TabLayout() {
         options={{
           title: 'Eco',
           tabBarIcon: ({ color }) => (
-            <Ionicons name="sparkles-outline" size={28} color={color} />
+            <Ionicons name="sparkles" size={28} color={color} />
           ),
         }}
       />
@@ -56,7 +56,7 @@ export default function TabLayout() {
         options={{
           title: 'Stories',
           tabBarIcon: ({ color }) => (
-            <Ionicons name="person-outline" size={28} color={color} />
+            <Ionicons name="person" size={28} color={color} />
           ),
         }}
       />
@@ -65,7 +65,7 @@ export default function TabLayout() {
         options={{
           title: 'Mindfulness',
           tabBarIcon: ({ color }) => (
-            <Ionicons name="book-outline" size={28} color={color} />
+            <Ionicons name="book" size={28} color={color} />
           ),
         }}
       />
@@ -74,7 +74,7 @@ export default function TabLayout() {
         options={{
           title: 'Subscription',
           tabBarIcon: ({ color }) => (
-            <Ionicons name="card-outline" size={28} color={color} />
+            <Ionicons name="card" size={28} color={color} />
           ),
         }}
       />
@@ -83,7 +83,7 @@ export default function TabLayout() {
         options={{
           title: 'Settings',
           tabBarIcon: ({ color }) => (
-            <Ionicons name="settings-outline" size={28} color={color} />
+            <Ionicons name="settings" size={28} color={color} />
           ),
         }}
       />
