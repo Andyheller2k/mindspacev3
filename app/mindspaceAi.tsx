@@ -40,7 +40,7 @@ export default function MindspaceAiScreen() {
         // No chat history? Show initial AI welcome message
         const welcomeMessage = {
           role: 'assistant',
-          content: 'Hello there my wonderful Mindspace user 🌿\nHow can I assist you today?',
+          content: 'Hello there my wonderful Mindspace user \nHow can I assist you today?',
         };
         setMessages([welcomeMessage]);
         await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify([welcomeMessage]));
@@ -129,59 +129,60 @@ const fetchAIResponse = async (userMessage: string) => {
   };
 
   return (
-  <KeyboardAvoidingView
-    style={{ flex: 1 }}
-    behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-    keyboardVerticalOffset={Platform.OS === 'ios' ? 50 : 0} // tweak if header overlaps
-  >
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={24} color="#000" />
-        </TouchableOpacity>
+  <SafeAreaView style={styles.safeArea}>
+    <View style={styles.header}>
+      <TouchableOpacity onPress={() => router.back()}>
+        <Ionicons name="arrow-back" size={24} color="#000" />
+      </TouchableOpacity>
 
-        <Text style={styles.headerText}>🧘 Ask Mindspace</Text>
-        <View style={{ flexDirection: 'row', gap: 12 }}>
-          <TouchableOpacity onPress={clearChat}>
-            <Ionicons name="trash-outline" size={24} color="#000" />
+      <Text style={styles.headerText}>🧘 Ask Mindspace</Text>
+      <View style={{ flexDirection: 'row', gap: 12 }}>
+        <TouchableOpacity onPress={clearChat}>
+          <Ionicons name="trash-outline" size={24} color="#000" />
+        </TouchableOpacity>
+      </View>
+    </View>
+
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 50 : 0}
+    >
+      <View style={{ flex: 1 }}>
+        <ScrollView
+          style={styles.chatArea}
+          contentContainerStyle={{ paddingBottom: 16 }}
+          keyboardShouldPersistTaps="handled"
+        >
+          {messages.map((msg, index) => (
+            <View
+              key={index}
+              style={[
+                styles.messageBubble,
+                msg.role === 'user' ? styles.userBubble : styles.aiBubble,
+              ]}
+            >
+              <Text style={styles.messageText}>{msg.content}</Text>
+            </View>
+          ))}
+          {loading && <ActivityIndicator size="large" color="#f4a261" />}
+        </ScrollView>
+
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="Ask something gentle..."
+            placeholderTextColor="#999"
+            style={styles.input}
+            value={input}
+            onChangeText={setInput}
+          />
+          <TouchableOpacity onPress={handleSend} disabled={loading}>
+            <Ionicons name="send" size={24} color={loading ? '#aaa' : '#00b4d8'} />
           </TouchableOpacity>
-          
         </View>
       </View>
-
-      <ScrollView
-        style={styles.chatArea}
-        contentContainerStyle={{ paddingBottom: 90 }}
-        keyboardShouldPersistTaps="handled"
-      >
-        {messages.map((msg, index) => (
-          <View
-            key={index}
-            style={[
-              styles.messageBubble,
-              msg.role === 'user' ? styles.userBubble : styles.aiBubble,
-            ]}
-          >
-            <Text style={styles.messageText}>{msg.content}</Text>
-          </View>
-        ))}
-        {loading && <ActivityIndicator size="large" color="#f4a261" />}
-      </ScrollView>
-
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="Ask something gentle..."
-          placeholderTextColor="#999"
-          style={styles.input}
-          value={input}
-          onChangeText={setInput}
-        />
-        <TouchableOpacity onPress={handleSend} disabled={loading}>
-          <Ionicons name="send" size={24} color={loading ? '#aaa' : '#00b4d8'} />
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
-  </KeyboardAvoidingView>
+    </KeyboardAvoidingView>
+  </SafeAreaView>
 );
 
 }
@@ -227,17 +228,14 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   inputContainer: {
-    position: 'absolute',
-    bottom: 25,
-    left: 0,
-    right: 0,
-    backgroundColor: '#fff',
-    flexDirection: 'row',
-    padding: 12,
-    alignItems: 'center',
-    borderTopWidth: 1,
-    borderColor: '#ccc',
-  },
+  backgroundColor: '#fff',
+  flexDirection: 'row',
+  padding: 12,
+  alignItems: 'center',
+  borderTopWidth: 1,
+  borderColor: '#ccc',
+},
+
   input: {
     flex: 1,
     height: 40,

@@ -63,10 +63,10 @@ const Cards = () => {
             />
             
             {index === 1&& (
-              <Text style={styles.belowText}>🌱 Your afternoon lift.</Text>
+              <Text style={styles.belowText}>Your afternoon lift.</Text>
             )}
             {index === 3&& (
-              <Text style={styles.belowText}>✨ At night.</Text>
+              <Text style={styles.belowText}>At night.</Text>
             )}
           </View>
         )}
