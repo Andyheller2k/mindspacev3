@@ -31,6 +31,41 @@ export default function Signup() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSignUp = async () => {
+    const nameRegex = /^[A-Za-z\s]+$/;
+const emailRegex = /^[\w.-]+@(gmail|yahoo|outlook)\.com$/i;
+const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+// Trimmed inputs
+const trimmedName = name.trim();
+const trimmedEmail = email.trim();
+const trimmedPassword = password.trim();
+const trimmedConfirmPassword = confirmPassword.trim();
+
+if (!trimmedName || !trimmedEmail || !trimmedPassword || !trimmedConfirmPassword) {
+  Alert.alert('Error', 'Please fill in all fields.');
+  return;
+}
+
+if (!nameRegex.test(trimmedName)) {
+  Alert.alert('Invalid Name', 'Name should contain only letters and spaces.');
+  return;
+}
+
+if (!emailRegex.test(trimmedEmail)) {
+  Alert.alert('Invalid Email', 'Only Gmail,Yahoo or Outlook emails are allowed.');
+  return;
+}
+
+if (!passwordRegex.test(trimmedPassword)) {
+  Alert.alert('Invalid Password', 'Password must be at least 8 characters and include letters, numbers, and symbols.');
+  return;
+}
+
+if (trimmedPassword !== trimmedConfirmPassword) {
+  Alert.alert('Error', 'Passwords do not match.');
+  return;
+}
+
     if (!name.trim() || !email.trim() || !password.trim() || !confirmPassword.trim()) {
       Alert.alert('Error', 'Please fill in all fields.');
       return;
@@ -39,6 +74,35 @@ export default function Signup() {
       Alert.alert('Error', 'Passwords do not match.');
       return;
     }
+    
+
+if (!nameRegex.test(name.trim())) {
+  Alert.alert(
+    'Invalid Name',
+    'Name should contain only letters and spaces. No numbers or symbols allowed.'
+  );
+  return;
+}
+
+
+    const allowedEmailRegex = /^[\w.-]+@(gmail|yahoo|outlook)\.com$/i;
+
+if (!allowedEmailRegex.test(email.trim())) {
+  Alert.alert(
+    'Invalid Email',
+    'Only Gmail,Yahoo or Outlook email addresses are allowed.'
+  );
+  return;
+}
+    
+
+if (!passwordRegex.test(password)) {
+  Alert.alert(
+    'Invalid Password',
+    'Password must be at least 8 characters long and include at least one letter, one number, and one special character.'
+  );
+  return;
+}
 
     setIsLoading(true);
     try {
@@ -58,6 +122,8 @@ export default function Signup() {
     }
   };
 
+const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
@@ -74,8 +140,28 @@ export default function Signup() {
             <Text style={styles.title}>Create An Account</Text>
 
             <TextInput style={styles.input} placeholder="Name" value={name} onChangeText={setName} />
+            {name.length > 0 && !/^[A-Za-z\s]+$/.test(name) && (
+  <Text style={{ color: 'red', fontSize: 12, marginBottom: 10 }}>
+    Name should contain only letters and spaces.
+  </Text>
+)}
+
+
+            
             <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} />
+            {email.length > 0 && !/^[\w.-]+@(gmail|yahoo|outlook)\.com$/i.test(email) && (
+  <Text style={{ color: 'red', fontSize: 12, marginBottom: 10 }}>
+    Only Gmail or Yahoo emails are allowed.
+  </Text>
+)}
+
             <TextInput style={styles.input} placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry />
+            {password.length > 0 && !passwordRegex.test(password) && (
+  <Text style={{ color: 'red', fontSize: 12, marginBottom: 10 }}>
+    Use 8+ characters, with letters, numbers & symbols.
+  </Text>
+)}
+
             <TextInput style={styles.input} placeholder="Confirm Password" value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry />
 
             {isLoading ? (

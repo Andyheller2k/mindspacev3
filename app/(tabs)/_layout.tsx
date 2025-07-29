@@ -25,7 +25,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="session"
+        name="Today"
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => (
@@ -42,15 +42,7 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="Today"
-        options={{
-          title: 'Eco',
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="sparkles" size={28} color={color} />
-          ),
-        }}
-      />
+      
       <Tabs.Screen
         name="SleepStories"
         options={{

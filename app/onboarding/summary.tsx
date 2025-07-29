@@ -29,21 +29,22 @@ const SummaryScreen = () => {
   }, []);
 
   const handleDone = async () => {
-    try {
-      const summary = {
-        purpose: userPurpose,
-        hobbies: userHobbies,
-        profile: userProfile,
-        avatar: selectedAvatar,
-      };
-      await AsyncStorage.setItem('userSummary', JSON.stringify(summary));
-      Alert.alert('Success', 'Profile saved!');
-      router.push('/(tabs)/session');
-    } catch (error) {
-      console.error('Error saving summary:', error);
-      Alert.alert('Error', 'Failed to save summary.');
-    }
-  };
+  try {
+    const summary = {
+      purpose: userPurpose,
+      hobbies: userHobbies,
+      profile: userProfile,
+      avatar: selectedAvatar,
+    };
+    await AsyncStorage.setItem('userSummary', JSON.stringify(summary));
+    Alert.alert('Success', 'Summary saved!');
+    router.push('/(tabs)/session');  // Change '/home' to your desired route
+  } catch (error) {
+    console.error('Error saving summary:', error);
+    Alert.alert('Error', 'Failed to save summary.');
+  }
+};
+
 
   const handleRestart = async () => {
     try {

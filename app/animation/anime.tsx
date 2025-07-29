@@ -48,7 +48,6 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({ value, onValueChange, c
   )
 }
 
-// Custom Linear Gradient Component
 interface CustomLinearGradientProps {
   colors: string[]
   style?: any
@@ -56,8 +55,7 @@ interface CustomLinearGradientProps {
 }
 
 const CustomLinearGradient: React.FC<CustomLinearGradientProps> = ({ colors, style, children }) => {
-  // For simplicity, we'll use the first color as background
-  // In a real app, you might want to use react-native-linear-gradient
+
   return <View style={[{ backgroundColor: colors[0] }, style]}>{children}</View>
 }
 
@@ -65,7 +63,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onCreateAccount, onLogin,
   const [isChecked, setChecked] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  // Animation values
+
   const fadeAnim = useRef(new Animated.Value(0)).current
   const slideAnim = useRef(new Animated.Value(50)).current
   const ringRotation1 = useRef(new Animated.Value(0)).current
@@ -76,7 +74,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onCreateAccount, onLogin,
   const loadingDot3 = useRef(new Animated.Value(0.4)).current
 
   useEffect(() => {
-    // Entrance animation
+    
     Animated.parallel([
       Animated.timing(fadeAnim, {
         toValue: 1,
@@ -91,7 +89,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onCreateAccount, onLogin,
       }),
     ]).start()
 
-    // Continuous ring rotation
+  
     const rotateRings = () => {
       Animated.parallel([
         Animated.timing(ringRotation1, {
@@ -281,7 +279,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onCreateAccount, onLogin,
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="dark-content" backgroundColor="#FDB913" />
 
-      {/* Skip Button */}
+    
       {onSkip && (
         <TouchableOpacity style={styles.skipButton} onPress={handleSkip}>
           <Text style={styles.skipText}>Skip</Text>
@@ -290,7 +288,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onCreateAccount, onLogin,
 
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
         <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false} bounces={false}>
-          {/* Top Section with Custom Gradient */}
+          
           <CustomLinearGradient colors={["#FDB913", "#FFD700"]} style={styles.topSection}>
             <Animated.View
               style={[
@@ -307,7 +305,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onCreateAccount, onLogin,
               <Text style={styles.logoText}>Mindspace</Text>
             </Animated.View>
 
-            {/* Animated Illustration */}
+            
             <Animated.View
               style={[
                 styles.illustrationContainer,
@@ -328,10 +326,10 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onCreateAccount, onLogin,
             </Animated.View>
           </CustomLinearGradient>
 
-          {/* Bottom Section */}
+          
           <View style={styles.bottomSection}>
             <View style={styles.contentContainer}>
-              {/* Welcome Text */}
+              
               <Animated.View
                 style={[
                   styles.welcomeContainer,
@@ -345,10 +343,10 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onCreateAccount, onLogin,
                 <Text style={styles.subtitle}>Your journey to mindfulness and inner peace starts here</Text>
               </Animated.View>
 
-              {/* Features */}
+              
               <View style={styles.featuresContainer}>{features.map(renderFeature)}</View>
 
-              {/* Terms & Conditions */}
+              
               <Animated.View
                 style={[
                   styles.checkboxContainer,
@@ -377,7 +375,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onCreateAccount, onLogin,
                 </View>
               </Animated.View>
 
-              {/* Action Buttons */}
+              
               <Animated.View
                 style={[
                   styles.buttonContainer,
@@ -425,7 +423,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onCreateAccount, onLogin,
                 </TouchableOpacity>
               </Animated.View>
 
-              {/* Social Proof */}
+            
               <Animated.View
                 style={[
                   styles.socialProof,

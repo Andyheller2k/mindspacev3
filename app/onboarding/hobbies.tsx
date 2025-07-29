@@ -40,7 +40,7 @@ export default function HobbiesScreen() {
   const handleContinue = async () => {
     try {
       await AsyncStorage.setItem('userHobbies', JSON.stringify(selected));
-      router.push('/onboarding/profile');
+      router.push('/smiley');
     } catch (error) {
       console.error('Error saving hobbies:', error);
     }

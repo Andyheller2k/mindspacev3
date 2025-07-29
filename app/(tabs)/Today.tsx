@@ -39,7 +39,7 @@ const Cards = () => {
       const j = Math.floor(seededRandom(daySeed + i) * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
-    return shuffled.slice(0, 7);
+    return shuffled.slice(0, 6);
   })();
 
   return (
@@ -61,10 +61,11 @@ const Cards = () => {
               url={item.url}
               onPress={() => handlePress(item)}
             />
-            {index === 2 && (
+            
+            {index === 1&& (
               <Text style={styles.belowText}>🌱 Your afternoon lift.</Text>
             )}
-            {index === 4 && (
+            {index === 3&& (
               <Text style={styles.belowText}>✨ At night.</Text>
             )}
           </View>
@@ -84,15 +85,15 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingHorizontal: 16,
-    paddingTop: 16, // spacing from top of screen
+    paddingTop: 20, 
     paddingBottom: 32,
   },
   belowText: {
-    color: '#000',
+    color: '#001F3F',
     fontSize: 25,
-    fontWeight: '300',
+    fontWeight: '700',
     marginTop: 8,
-    marginBottom: 20,
+    marginBottom: 1,
     textAlign: 'left',
     paddingHorizontal: 20,
   },

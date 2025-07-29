@@ -1,5 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
-import React, { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'expo-router';
+
+import React, { JSX, useEffect, useRef, useState } from 'react';
 import {
   Alert,
   FlatList,
@@ -55,6 +57,7 @@ const sessions: Session[] = [
 ];
 
 export default function MeditationTimerEnhanced(): JSX.Element {
+  const router = useRouter();
   const insets = useSafeAreaInsets();
   const [view, setView] = useState<ViewType>('sessions');
   const [timerState, setTimerState] = useState<TimerState>('idle');
@@ -219,9 +222,10 @@ export default function MeditationTimerEnhanced(): JSX.Element {
        <View style={[styles.safeArea, { paddingTop: insets.top }]}>
         {/* Header */}
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => setView('sessions')}>
-            <Ionicons name="arrow-back" size={24} color="#4F46E5" />
-          </TouchableOpacity>
+          <TouchableOpacity onPress={() => router.back()}>
+  <Ionicons name="arrow-back" size={24} color="#4F46E5" />
+</TouchableOpacity>
+
           <Text style={styles.headerTitle}>Meditation</Text>
 
         </View>

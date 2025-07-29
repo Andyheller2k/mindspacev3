@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import React, { JSX, useState } from 'react';
 import {
   Alert,
@@ -96,7 +97,7 @@ export default function ExploreScreen(): JSX.Element {
           <FeatureTile 
             title="Meditate" 
             color="#f4a261" 
-            onPress={() => handleFeaturePress('Meditate')}
+            onPress={() => router.push('../session')}
           />
           <FeatureTile 
             title="Sleep" 
@@ -119,12 +120,15 @@ export default function ExploreScreen(): JSX.Element {
         </View>
         
         {/* Podcasts Section */}
-        <FeatureTile 
-          title="Podcasts" 
-          color="#f6c90e" 
-          onPress={() => handleFeaturePress('Podcasts')}
-          isLong={true}
-        />
+        
+
+<FeatureTile 
+  title="Podcasts" 
+  color="#f6c90e" 
+  onPress={() => router.push('../podcast')} 
+  isLong={true}
+/>
+
         
         {/* Premium Library Section */}
         <View style={styles.bookshelf}>

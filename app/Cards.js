@@ -47,7 +47,7 @@ const Cards = () => {
             onPress={() => handlePress(item)}
           />
 
-          {index === 2 && (
+          {index === 1&& (
             <Text style={styles.belowText}>🌱 Your afternoon lift.</Text>
           )}
           {index === 4 && (

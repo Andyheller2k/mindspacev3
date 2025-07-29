@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "login-app",
-    "slug": "login-app",
+    "name": "MindSpace",
+    "slug": "mindspace",
     "version": "1.0.0",
     "sdkVersion": "53.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "loginapp",
-    "userInterfaceStyle": "automatic",
+    "orientation": "default",
+    "icon": "./assets/images/smiley.png",
+    "scheme": "mindspace",
+    "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
@@ -18,7 +18,10 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.anonymous.loginapp"
+      "package": "com.anonymous.loginapp",
+      "permissions": [
+        "INTERNET"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -30,7 +33,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/smiley.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
@@ -40,5 +43,6 @@
     "experiments": {
       "typedRoutes": true
     }
+   
   }
 }

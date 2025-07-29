@@ -478,7 +478,7 @@ export default function DetailScreen() {
 
   const getImageSource = () => {
     return typeof parsed.image === 'string'
-      ? require('../assets/images/fb.png')
+      ? require('../assets/images/sleep-awake.png')
       : parsed.image;
   };
 

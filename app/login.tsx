@@ -39,7 +39,7 @@ export default function Login() {
     });
 
     await AsyncStorage.setItem('userToken', response.data.token);
-    router.replace('/(tabs)/session');
+    router.replace('/(tabs)/Today');
   } catch (error) {
     Alert.alert('Login Failed', 'Incorrect email or password.');
   } finally {
