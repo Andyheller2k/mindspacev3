@@ -7,7 +7,7 @@ export default function BlurTabBarBackground() {
     <BlurView
      
       tint="systemChromeMaterial"
-      intensity={10}
+      intensity={20}
       style={StyleSheet.absoluteFill}
     />
   );

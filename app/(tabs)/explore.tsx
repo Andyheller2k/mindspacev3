@@ -102,7 +102,7 @@ export default function ExploreScreen(): JSX.Element {
           <FeatureTile 
             title="Sleep" 
             color="#6c5ce7" 
-            onPress={() => handleFeaturePress('Sleep')}
+            onPress={() => router.push('../sleep')}
           />
         </View>
         
@@ -110,12 +110,12 @@ export default function ExploreScreen(): JSX.Element {
           <FeatureTile 
             title="Move" 
             color="#d291bc" 
-            onPress={() => handleFeaturePress('Move')}
+            onPress={() => router.push('../move')}
           />
           <FeatureTile 
             title="Music" 
             color="#00b4d8" 
-            onPress={() => handleFeaturePress('Music')}
+            onPress={() => router.push('../music')}
           />
         </View>
         
@@ -147,7 +147,7 @@ export default function ExploreScreen(): JSX.Element {
         <FeatureTile 
           title="Ask Mindspace" 
           color="#f4a261" 
-          onPress={() => handleFeaturePress('Ask Mindspace')}
+          onPress={() => router.push('../mindspaceAi')}
           isLong={true}
         />
         
