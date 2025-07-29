@@ -154,30 +154,19 @@ export default function ExploreScreen(): JSX.Element {
         <FeatureTile 
           title="Kids & Family" 
           color="#a29bfe" 
-          onPress={() => handleFeaturePress('Kids & Family')}
+          onPress={() => router.push('../kidsFamily')}
           isLong={true}
         />
         
         <FeatureTile 
           title="Videos and More" 
           color="#6c757d" 
-          onPress={() => handleFeaturePress('Videos and More')}
+          onPress={() => router.push('../videos')}
           isLong={true}
         />
         
         {/* Bottom Navigation */}
-        <View style={styles.navbar}>
-          {['Today', 'Explore', 'Profile'].map((tab) => (
-            <TouchableOpacity key={tab} onPress={() => handleNavPress(tab)}>
-              <Text style={[
-                styles.navItem, 
-                activeTab === tab && styles.selectedNav
-              ]}>
-                {tab}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+        
       </ScrollView>
     </SafeAreaView>
   );

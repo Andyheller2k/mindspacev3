@@ -1,4 +1,6 @@
+import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
+
 import {
   FlatList,
   Image,
@@ -28,6 +30,8 @@ const sleepcasts = [
 ];
 
 const SleepScreen = () => {
+  const router = useRouter();
+
   const [activeTab, setActiveTab] = useState('Featured');
 
   const renderItem = ({ item }) => (
@@ -79,6 +83,9 @@ const SleepScreen = () => {
         keyExtractor={(item, index) => index.toString()}
         contentContainerStyle={{ paddingBottom: 80 }}
       />
+      <TouchableOpacity onPress={() => router.back()} style={{ marginTop: 20 }}>
+  <Text style={{ color: 'purple', fontSize: 50 }}>←</Text>
+</TouchableOpacity>
 
     
       

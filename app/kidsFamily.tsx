@@ -1,40 +1,38 @@
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-
 import {
-  FlatList,
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
+    FlatList,
+    Image,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
 } from 'react-native';
 
 const featuredTracks = [
   {
-    title: 'Breathing through exams',
-    image: require('../assets/images/music1.jpeg'),
-    duration: '10 min',
-    type: 'Meditation',
+    title: 'Bedtime Story: The Magic Forest',
+    image: require('../assets/images/kids1.jpeg'),
+    duration: '8 min',
+    type: 'Story',
   },
   {
-    title: 'Organizing Thoughts',
-    image: require('../assets/images/music3.jpeg'),
-    duration: '7 min',
-    type: 'Meditation',
+    title: 'Happy Dance Break',
+    image: require('../assets/images/kids3.jpeg'),
+    duration: '5 min',
+    type: 'Music',
   },
   {
-    title: 'Study Beats',
-    image: require('../assets/images/music5.jpeg'),
-    duration: '54 min',
-    type: 'Focus Music',
+    title: 'Breathe with Teddy',
+    image: require('../assets/images/kids2.jpeg'),
+    duration: '3 min',
+    type: 'Mindfulness',
   },
 ];
 
-const MusicScreen = () => {
+const KidsFamilyScreen = () => {
   const router = useRouter();
-
   const [activeTab, setActiveTab] = useState('Featured');
 
   const renderItem = ({ item }) => (
@@ -43,7 +41,7 @@ const MusicScreen = () => {
       <View>
         <Text style={styles.itemTitle}>🔒 {item.title}</Text>
         <Text style={styles.itemSubtitle}>
-          🎵 {item.type} · {item.duration}
+          👨‍👩‍👧‍👦 {item.type} · {item.duration}
         </Text>
       </View>
     </TouchableOpacity>
@@ -51,21 +49,20 @@ const MusicScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-   
-
-      <Text style={styles.header}>Music</Text>
       
+
+      <Text style={styles.header}>Kids & Family</Text>
 
       {/* Banner */}
       <View style={styles.bannerContainer}>
-        <Image source={require('../assets/images/music2.jpeg')} style={styles.bannerImage} />
+        <Image source={require('../assets/images/kids.jpeg')} style={styles.bannerImage} />
       </View>
 
       {/* Featured Info */}
       <View style={styles.featuredBlock}>
-        <Text style={styles.featuredLabel}>Featured</Text>
-        <Text style={styles.featuredTitle}>Guide to Meditation</Text>
-        <Text style={styles.featuredSubtitle}>🎵 Focus Music · 135 min</Text>
+        <Text style={styles.featuredLabel}>Today&apos;s Pick</Text>
+        <Text style={styles.featuredTitle}>The Rainbow Explorer</Text>
+        <Text style={styles.featuredSubtitle}>👨‍👩‍👧‍👦 Story · 12 min</Text>
         <TouchableOpacity style={styles.playButton}>
           <Text style={styles.playText}>🔒 Play</Text>
         </TouchableOpacity>
@@ -92,10 +89,9 @@ const MusicScreen = () => {
         keyExtractor={(item, index) => index.toString()}
         contentContainerStyle={{ paddingBottom: 80 }}
       />
-           <TouchableOpacity onPress={() => router.back()} style={{ marginTop: 20 }}>
-  <Text style={{ color: 'yellow', fontSize: 50 }}>←</Text>
-</TouchableOpacity>
-      
+      <TouchableOpacity onPress={() => router.back()} style={{ marginTop: 20 }}>
+        <Text style={{ color: 'yellow', fontSize: 50 }}>←</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -110,22 +106,23 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     color: 'white',
-    marginTop: 50,
+    marginTop: 10,
     marginBottom: 8,
   },
   bannerContainer: {
-    backgroundColor: '#FCD32D',
+    backgroundColor: '#0D0D2B',
     borderBottomLeftRadius: 20,
-    borderTopLeftRadius:20,
-    borderTopRightRadius:20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     borderBottomRightRadius: 20,
     alignItems: 'center',
     paddingVertical: 24,
   },
   bannerImage: {
-    width: 160,
+    width: '100%',
     height: 160,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
+    borderRadius: 12,
   },
   featuredBlock: {
     marginTop: 20,
@@ -195,25 +192,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 2,
   },
-  bottomNav: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    borderTopColor: '#222',
-    borderTopWidth: 1,
-    paddingVertical: 10,
-    backgroundColor: '#0D0D2B',
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-  },
-  navItem: {
-    color: '#888',
-    fontSize: 12,
-  },
-  navActive: {
-    color: 'white',
-    fontWeight: '600',
-  },
+  
 });
 
-export default MusicScreen;
+export default KidsFamilyScreen;

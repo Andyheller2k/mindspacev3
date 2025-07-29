@@ -222,9 +222,7 @@ export default function MeditationTimerEnhanced(): JSX.Element {
        <View style={[styles.safeArea, { paddingTop: insets.top }]}>
         {/* Header */}
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => router.back()}>
-  <Ionicons name="arrow-back" size={24} color="#4F46E5" />
-</TouchableOpacity>
+      
 
           <Text style={styles.headerTitle}>Meditation</Text>
 
@@ -268,6 +266,9 @@ export default function MeditationTimerEnhanced(): JSX.Element {
 
         {view === 'custom' && renderCustomView()}
       </View>
+          <TouchableOpacity onPress={() => router.back()}>
+  <Ionicons name="arrow-back" size={50} color="#4F46E5" />
+</TouchableOpacity>
     </SafeAreaView>
   );
 }

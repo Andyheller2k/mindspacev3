@@ -1,4 +1,6 @@
+import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
+
 import {
   FlatList,
   Image,
@@ -28,6 +30,8 @@ const workouts = [
 ];
 
 const MoveScreen = () => {
+  const router = useRouter();
+
   const [activeTab, setActiveTab] = useState('Featured');
 
   const renderItem = ({ item }) => (
@@ -82,7 +86,10 @@ const MoveScreen = () => {
         contentContainerStyle={{ paddingBottom: 80 }}
       />
 
-      {/* Bottom Navigation */}
+      <TouchableOpacity onPress={() => router.back()} style={{ marginTop: 20 }}>
+  <Text style={{ color: 'white', fontSize: 50 }}>← </Text>
+</TouchableOpacity>
+
       
     </SafeAreaView>
   );
@@ -109,6 +116,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 70,
     alignItems: 'center',
     paddingVertical: 50,
+    top:20,
   },
   mainImage: {
     width: 160,

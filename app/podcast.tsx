@@ -50,7 +50,7 @@ const PodcastScreen = () => {
   return (
     <View style={styles.container}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-  <Ionicons name="arrow-back" size={24} color="#fff" />
+  <Ionicons name="arrow-back" size={30} color="#fff" />
 </TouchableOpacity>
 
       <Text style={styles.header}>Podcasts</Text>

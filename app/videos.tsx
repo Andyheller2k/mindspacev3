@@ -1,49 +1,47 @@
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-
 import {
-  FlatList,
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
+    FlatList,
+    Image,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
 } from 'react-native';
 
-const featuredTracks = [
+const featuredMovies = [
   {
-    title: 'Breathing through exams',
-    image: require('../assets/images/music1.jpeg'),
-    duration: '10 min',
-    type: 'Meditation',
+    title: 'Into the Multiverse',
+    image: require('../assets/images/movie1.jpeg'),
+    duration: '2h 12m',
+    type: 'Sci-Fi',
   },
   {
-    title: 'Organizing Thoughts',
-    image: require('../assets/images/music3.jpeg'),
-    duration: '7 min',
-    type: 'Meditation',
+    title: 'Laugh Out Loud',
+    image: require('../assets/images/movie2.jpeg'),
+    duration: '1h 45m',
+    type: 'Comedy',
   },
   {
-    title: 'Study Beats',
-    image: require('../assets/images/music5.jpeg'),
-    duration: '54 min',
-    type: 'Focus Music',
+    title: 'Chasing Legends',
+    image: require('../assets/images/movie3.jpeg'),
+    duration: '2h 8m',
+    type: 'Adventure',
   },
 ];
 
-const MusicScreen = () => {
+const MoviesEntertainmentScreen = () => {
   const router = useRouter();
-
   const [activeTab, setActiveTab] = useState('Featured');
 
   const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.itemRow}>
       <Image source={item.image} style={styles.itemImage} />
       <View>
-        <Text style={styles.itemTitle}>🔒 {item.title}</Text>
+        <Text style={styles.itemTitle}>🎬 {item.title}</Text>
         <Text style={styles.itemSubtitle}>
-          🎵 {item.type} · {item.duration}
+          🍿 {item.type} · {item.duration}
         </Text>
       </View>
     </TouchableOpacity>
@@ -51,23 +49,24 @@ const MusicScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-   
+      <TouchableOpacity onPress={() => router.back()} style={{ marginTop: 20 }}>
+        <Text style={{ color: 'yellow', fontSize: 50 }}>←</Text>
+      </TouchableOpacity>
 
-      <Text style={styles.header}>Music</Text>
-      
+      <Text style={styles.header}>Movies & Entertainment</Text>
 
       {/* Banner */}
       <View style={styles.bannerContainer}>
-        <Image source={require('../assets/images/music2.jpeg')} style={styles.bannerImage} />
+        <Image source={require('../assets/images/movie4.jpeg')} style={styles.bannerImage} />
       </View>
 
       {/* Featured Info */}
       <View style={styles.featuredBlock}>
-        <Text style={styles.featuredLabel}>Featured</Text>
-        <Text style={styles.featuredTitle}>Guide to Meditation</Text>
-        <Text style={styles.featuredSubtitle}>🎵 Focus Music · 135 min</Text>
+        <Text style={styles.featuredLabel}>Tonight’s Spotlight</Text>
+        <Text style={styles.featuredTitle}>Edge of Reality</Text>
+        <Text style={styles.featuredSubtitle}>🎬 Thriller · 1h 58m</Text>
         <TouchableOpacity style={styles.playButton}>
-          <Text style={styles.playText}>🔒 Play</Text>
+          <Text style={styles.playText}>▶️ Watch</Text>
         </TouchableOpacity>
       </View>
 
@@ -87,15 +86,11 @@ const MusicScreen = () => {
 
       {/* List */}
       <FlatList
-        data={featuredTracks}
+        data={featuredMovies}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
         contentContainerStyle={{ paddingBottom: 80 }}
       />
-           <TouchableOpacity onPress={() => router.back()} style={{ marginTop: 20 }}>
-  <Text style={{ color: 'yellow', fontSize: 50 }}>←</Text>
-</TouchableOpacity>
-      
     </SafeAreaView>
   );
 };
@@ -107,25 +102,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   header: {
-    fontSize: 18,
-    fontWeight: '600',
+    fontSize: 22,
+    fontWeight: '700',
     color: 'white',
-    marginTop: 50,
+    marginTop: 10,
     marginBottom: 8,
   },
   bannerContainer: {
-    backgroundColor: '#FCD32D',
-    borderBottomLeftRadius: 20,
-    borderTopLeftRadius:20,
-    borderTopRightRadius:20,
-    borderBottomRightRadius: 20,
+    backgroundColor: '#0D0D2B',
+    borderRadius: 20,
     alignItems: 'center',
     paddingVertical: 24,
   },
-  bannerImage: {
-    width: 160,
+   bannerImage: {
+    width: '100%',
     height: 160,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
+    borderRadius: 12,
   },
   featuredBlock: {
     marginTop: 20,
@@ -147,7 +140,7 @@ const styles = StyleSheet.create({
     marginVertical: 4,
   },
   playButton: {
-    backgroundColor: '#2979FF',
+    backgroundColor: '#E50914',
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 25,
@@ -180,8 +173,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   itemImage: {
-    width: 60,
-    height: 60,
+    width: 70,
+    height: 70,
     borderRadius: 10,
     marginRight: 12,
   },
@@ -195,25 +188,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 2,
   },
-  bottomNav: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    borderTopColor: '#222',
-    borderTopWidth: 1,
-    paddingVertical: 10,
-    backgroundColor: '#0D0D2B',
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-  },
-  navItem: {
-    color: '#888',
-    fontSize: 12,
-  },
-  navActive: {
-    color: 'white',
-    fontWeight: '600',
-  },
 });
 
-export default MusicScreen;
+export default MoviesEntertainmentScreen;

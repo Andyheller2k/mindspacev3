@@ -4,16 +4,16 @@ import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import {
-    ActivityIndicator,
-    Alert,
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -143,9 +143,9 @@ const fetchAIResponse = async (userMessage: string) => {
         <Text style={styles.headerText}>🧘 Ask Mindspace</Text>
         <View style={{ flexDirection: 'row', gap: 12 }}>
           <TouchableOpacity onPress={clearChat}>
-            <Ionicons name="trash-outline" size={24} color="#fff" />
+            <Ionicons name="trash-outline" size={24} color="#000" />
           </TouchableOpacity>
-          <Ionicons name="chatbubbles-outline" size={28} color="#fff" />
+          
         </View>
       </View>
 
