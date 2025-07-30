@@ -10,7 +10,10 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "runtimeVersion": "1.0.0"
+,
+      "bundleIdentifier": "com.anonymous.loginapp"
     },
     "android": {
       "adaptiveIcon": {
@@ -20,8 +23,10 @@
       "edgeToEdgeEnabled": true,
       "package": "com.anonymous.loginapp",
       "permissions": [
+        "INTERNET",
         "INTERNET"
-      ]
+      ],
+      "runtimeVersion": "1.0.0"
     },
     "web": {
       "bundler": "metro",
@@ -48,6 +53,9 @@
       "eas": {
         "projectId": "8eba47e6-f292-4433-8476-43662d9c42be"
       }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/8eba47e6-f292-4433-8476-43662d9c42be"
     }
   }
 }

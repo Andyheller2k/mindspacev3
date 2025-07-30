@@ -1,124 +1,197 @@
-
 import { Ionicons } from '@expo/vector-icons';
-import * as ImagePicker from 'expo-image-picker';
-import { LinearGradient } from 'expo-linear-gradient';
-import React, { useState } from 'react';
-import {
-  Image,
-  Platform,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { useRouter } from 'expo-router';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function ProfileScreen() {
-  const [name, setName] = useState('');
-  const [imageUri, setImageUri] = useState(null);
-
-  const pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setImageUri(result.assets[0].uri);
-    }
+  const router = useRouter();
+  
+  // Sample user data
+  const user = {
+    name: 'Alex Johnson',
+    age: 28,
+    country: 'Canada',
+    avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
+    bio: 'Digital designer & photography enthusiast. Love hiking and coffee.',
   };
 
   return (
-    <LinearGradient
-      colors={["#dbeafe", "#bfdbfe"]}
-      style={styles.container}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-    >
-      <View style={styles.profileCard}>
-        <TouchableOpacity onPress={pickImage} style={styles.imageWrapper}>
-          {imageUri ? (
-            <Image source={{ uri: imageUri }} style={styles.image} />
-          ) : (
-            <View style={styles.placeholder}>
-              <Ionicons name="camera" size={30} color="#93c5fd" />
-              <Text style={styles.placeholderText}>Select Photo</Text>
-            </View>
-          )}
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+          <Ionicons name="arrow-back" size={24} color="#333" />
         </TouchableOpacity>
-
-        <TextInput
-          style={styles.nameInput}
-          placeholder="Enter your name"
-          placeholderTextColor="#60a5fa"
-          value={name}
-          onChangeText={setName}
-        />
-
-        <Text style={styles.namePreview}>{name ? `Hello, ${name}!` : ''}</Text>
+        <Text style={styles.headerTitle}>Profile</Text>
+        <View style={{ width: 24 }} /> {/* Spacer for alignment */}
       </View>
-    </LinearGradient>
+
+      {/* Profile Content */}
+      <View style={styles.profileContainer}>
+        {/* Avatar */}
+        <View style={styles.avatarContainer}>
+          <Image source={{ uri: user.avatar }} style={styles.avatar} />
+          <TouchableOpacity style={styles.editIcon}>
+            <Ionicons name="camera" size={20} color="#fff" />
+          </TouchableOpacity>
+        </View>
+
+        {/* Name */}
+        <Text style={styles.name}>{user.name}</Text>
+
+        {/* Age & Country */}
+        <View style={styles.detailsContainer}>
+          <View style={styles.detailItem}>
+            <Ionicons name="calendar" size={18} color="#666" />
+            <Text style={styles.detailText}>{user.age} years</Text>
+          </View>
+          
+          <View style={styles.detailItem}>
+            <Ionicons name="location" size={18} color="#666" />
+            <Text style={styles.detailText}>{user.country}</Text>
+          </View>
+        </View>
+
+        {/* Bio */}
+        <Text style={styles.bio}>{user.bio}</Text>
+
+        {/* Stats */}
+        <View style={styles.statsContainer}>
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>142</Text>
+            <Text style={styles.statLabel}>Posts</Text>
+          </View>
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>3.2K</Text>
+            <Text style={styles.statLabel}>Followers</Text>
+          </View>
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>487</Text>
+            <Text style={styles.statLabel}>Following</Text>
+          </View>
+        </View>
+
+        {/* Edit Profile Button */}
+        <TouchableOpacity style={styles.editButton}>
+          <Text style={styles.editButtonText}>Edit Profile</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS === 'android' ? 50 : 0,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: '#fff',
   },
-  profileCard: {
-    width: '85%',
-    borderRadius: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 20,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 10,
-    backdropFilter: 'blur(10px)',
+    paddingTop: 50,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
   },
-  imageWrapper: {
+  backButton: {
+    padding: 4,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#333',
+  },
+  profileContainer: {
+    alignItems: 'center',
+    padding: 20,
+  },
+  avatarContainer: {
+    position: 'relative',
     marginBottom: 20,
-    borderRadius: 75,
+  },
+  avatar: {
     width: 120,
     height: 120,
-    overflow: 'hidden',
-    backgroundColor: '#e0f2fe',
+    borderRadius: 60,
+    borderWidth: 3,
+    borderColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+  },
+  editIcon: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    backgroundColor: '#4a80f0',
+    borderRadius: 20,
+    width: 40,
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 3,
+    borderColor: '#fff',
   },
-  image: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
+  name: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 8,
   },
-  placeholder: {
+  detailsContainer: {
+    flexDirection: 'row',
     justifyContent: 'center',
+    gap: 20,
+    marginBottom: 20,
+  },
+  detailItem: {
+    flexDirection: 'row',
     alignItems: 'center',
+    gap: 6,
   },
-  placeholderText: {
-    fontSize: 12,
-    color: '#60a5fa',
-    marginTop: 5,
-  },
-  nameInput: {
-    width: '100%',
-    borderBottomWidth: 1,
-    borderColor: '#60a5fa',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
+  detailText: {
+    color: '#666',
     fontSize: 16,
-    color: '#1e3a8a',
   },
-  namePreview: {
-    marginTop: 20,
+  bio: {
+    textAlign: 'center',
+    color: '#555',
+    fontSize: 16,
+    lineHeight: 24,
+    maxWidth: '80%',
+    marginBottom: 25,
+  },
+  statsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    marginBottom: 25,
+    paddingHorizontal: 20,
+  },
+  statItem: {
+    alignItems: 'center',
+  },
+  statNumber: {
     fontSize: 18,
-    color: '#1e40af',
-    fontWeight: 'bold',
+    fontWeight: '600',
+    color: '#333',
+  },
+  statLabel: {
+    fontSize: 14,
+    color: '#666',
+  },
+  editButton: {
+    backgroundColor: '#4a80f0',
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 25,
+    width: '80%',
+  },
+  editButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+    textAlign: 'center',
   },
 });

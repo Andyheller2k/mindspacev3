@@ -108,7 +108,7 @@ export default function ExploreScreen(): JSX.Element {
         
         <View style={styles.row}>
           <FeatureTile 
-            title="Move" 
+            title="Fitness" 
             color="#d291bc" 
             onPress={() => router.push('../move')}
           />

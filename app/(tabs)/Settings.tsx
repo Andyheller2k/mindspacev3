@@ -8,7 +8,7 @@ export default function SettingsScreen() {
   const router = useRouter();
 
   const settings = [
-    { label: 'Profile', icon: 'person.crop.circle', onPress: () => router.push('./onboarding/profile') },
+    { label: 'Profile', icon: 'person.crop.circle', onPress: () => router.push('../profile') },
     { label: 'Account', icon: 'paperplane.fill', onPress: () => {} },
     { label: 'Notifications', icon: 'chevron.right', onPress: () => {} },
     { label: 'Privacy & Security', icon: 'chevron.left.forwardslash.chevron.right', onPress: () => {} },

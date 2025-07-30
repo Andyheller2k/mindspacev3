@@ -36,15 +36,7 @@ export default [
     image: require('../assets/images/waving.webp'),
     url: 'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-lullaby-night-531.mp3',
   },
-  {
-    id: 5,
-    title: 'Stress Relief',
-    description: 'Let go of stress and tension.',
-    duration: '1:41 s',
-    category: 'Relaxation',
-    image: require('../assets/images/stress.webp'),
-    url: 'https://raw.githubusercontent.com/Sumani-Alima-Mahami/SampleTest/refs/heads/main/mixkit-island-beat-250.mp3',
-  },
+  
   {
     id: 6,
     title: 'Concentration',
