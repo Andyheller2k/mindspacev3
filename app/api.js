@@ -1,8 +1,7 @@
-
-
 import axios from 'axios';
 
-const BASE_URL = 'http://172.20.10.12:8080'; 
+const BASE_URL = 'https://7fcebd43f454.ngrok-free.app';
+
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -10,4 +9,5 @@ const api = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
 export default api;
