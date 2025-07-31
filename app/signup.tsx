@@ -1,4 +1,5 @@
 // Signup.js (refactored with two-tone layout)
+import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
@@ -24,6 +25,9 @@ import api from './api.js';
 const { height } = Dimensions.get('window');
 
 export default function Signup() {
+  const [showPassword, setShowPassword] = useState(false);
+const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +37,8 @@ export default function Signup() {
   const handleSignUp = async () => {
     const nameRegex = /^[A-Za-z\s]+$/;
 const emailRegex = /^[\w.-]+@(gmail|yahoo|outlook)\.com$/i;
-const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]).{8,}$/;
+
 
 // Trimmed inputs
 const trimmedName = name.trim();
@@ -122,7 +127,8 @@ if (!passwordRegex.test(password)) {
     }
   };
 
-const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]).{8,}$/;
+
 
   return (
     <KeyboardAvoidingView
@@ -138,12 +144,13 @@ const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8
 
           <View style={styles.bottomSection}>
             <Text style={styles.title}>Create An Account</Text>
-
+            
             <TextInput style={styles.input} placeholder="Name" value={name} onChangeText={setName} />
             {name.length > 0 && !/^[A-Za-z\s]+$/.test(name) && (
   <Text style={{ color: 'red', fontSize: 12, marginBottom: 10 }}>
     Name should contain only letters and spaces.
   </Text>
+  
 )}
 
 
@@ -154,15 +161,25 @@ const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8
     Only Gmail or Yahoo emails are allowed.
   </Text>
 )}
-
-            <TextInput style={styles.input} placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry />
+            <View style={styles.inputWrapper}>
+            <TextInput style={styles.innerInput} placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry ={!showPassword} />
+            <TouchableOpacity  onPress={()=> setShowPassword(!showPassword)} style={styles.eyeIcon}>
+              <Ionicons name={showPassword ? 'eye': 'eye-off'} size={24} color="gray"/>
+              </TouchableOpacity>
+              </View>
             {password.length > 0 && !passwordRegex.test(password) && (
   <Text style={{ color: 'red', fontSize: 12, marginBottom: 10 }}>
     Use 8+ characters, with letters, numbers & symbols.
   </Text>
 )}
 
-            <TextInput style={styles.input} placeholder="Confirm Password" value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry />
+            <View style={styles.inputWrapper}>
+            <TextInput style={styles.innerInput} placeholder="Confirm Password" value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry ={!showConfirmPassword}/>
+            <TouchableOpacity onPress={()=> setShowConfirmPassword(!showConfirmPassword)}
+            style={styles.eyeIcon}>
+              <Ionicons name ={showConfirmPassword? 'eye':'eye-off'} size={24} color="gray" />
+            </TouchableOpacity>
+            </View>
 
             {isLoading ? (
               <ActivityIndicator size="large" color="#fff" />
@@ -228,14 +245,16 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   input: {
-    height: 50,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    marginBottom: 15,
-    backgroundColor: 'white',
-  },
+  height: 50,
+  borderColor: '#ccc',
+  borderWidth: 1,
+  borderRadius: 10,
+  paddingHorizontal: 15,
+  marginBottom: 15,
+  backgroundColor: 'white',
+},
+
+
   signUpButton: {
     backgroundColor: '#007AFF',
     paddingVertical: 15,
@@ -293,4 +312,27 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 14,
   },
+inputWrapper: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  borderColor: '#ccc',
+  borderWidth: 1,
+  borderRadius: 10,
+  backgroundColor: 'white',
+  marginBottom: 15,
+  paddingHorizontal: 10,
+},
+
+innerInput:{
+flex:1,
+height:50,
+paddingHorizontal:10,
+color:'black'
+},
+
+eyeIcon: {
+  padding: 5,
+},
+  
+  
 });

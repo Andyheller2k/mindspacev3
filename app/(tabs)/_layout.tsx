@@ -62,6 +62,16 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="subscriptions"
+        options={{
+          title: 'Subscription',
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="book" size={28} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
         name="Settings"
         options={{
           title: 'Settings',

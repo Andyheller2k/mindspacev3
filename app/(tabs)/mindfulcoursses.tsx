@@ -1,14 +1,14 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { JSX, useState } from 'react';
 import {
-    Alert,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View
+  Alert,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -250,17 +250,21 @@ export default function MindfulnessCourses(): JSX.Element {
         />
       </View>
     </TouchableOpacity>
-  );
-
+  
+);
+ 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
       <ScrollView 
         contentContainerStyle={styles.container}
         showsVerticalScrollIndicator={false}
       >
+        {/* Background layer for glassmorphism */}
+        <View style={styles.backgroundLayer} />
+        
         {/* Header */}
-         <View style={[styles.safeArea, { paddingTop: insets.top }]}>
+        <View style={[styles.headerContainer, { paddingTop: insets.top + 20 }]}>
           <Text style={styles.subtitle}>Easy-To-Learn</Text>
           <Text style={styles.title}>Mindfulness Courses</Text>
           <Text style={styles.headerDescription}>
@@ -268,7 +272,7 @@ export default function MindfulnessCourses(): JSX.Element {
           </Text>
         </View>
 
-        {/* Stats */}
+        {/* Stats - using the original implementation */}
         <View style={styles.statsContainer}>
           <View style={styles.statItem}>
             <Text style={styles.statNumber}>{courses.length}</Text>
@@ -298,35 +302,50 @@ export default function MindfulnessCourses(): JSX.Element {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
+  },
+  backgroundLayer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
   },
   container: {
     paddingBottom: 40,
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
   },
-  header: {
-    paddingHorizontal: 20,
-    paddingTop: 20,
-    paddingBottom: 10,
-    alignItems: 'center',
+  headerContainer: {
+    paddingHorizontal: 24,
+    paddingBottom: 16,
+    marginBottom: 16,
   },
   subtitle: {
     color: '#F2994A',
     fontSize: 16,
     fontWeight: '500',
     marginBottom: 7,
+    textShadowColor: 'rgba(0, 0, 0, 0.1)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
   },
   title: {
     fontWeight: '700',
     fontSize: 28,
     marginBottom: 7,
     color: '#1F2937',
+    textShadowColor: 'rgba(0, 0, 0, 0.1)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
   },
   headerDescription: {
     fontSize: 16,
     color: '#6B7280',
-    textAlign: 'center',
     lineHeight: 22,
+    textShadowColor: 'rgba(0, 0, 0, 0.05)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 1,
   },
   statsContainer: {
     flexDirection: 'row',
@@ -334,6 +353,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 20,
     marginBottom: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    borderRadius: 20,
+    marginHorizontal: 20,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.5)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    backdropFilter: 'blur(10px)',
   },
   statItem: {
     alignItems: 'center',
@@ -343,11 +372,17 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#1F2937',
     marginBottom: 4,
+    textShadowColor: 'rgba(0, 0, 0, 0.1)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
   },
   statLabel: {
     fontSize: 14,
     color: '#6B7280',
     fontWeight: '500',
+    textShadowColor: 'rgba(0, 0, 0, 0.05)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 1,
   },
   coursesContainer: {
     paddingHorizontal: 20,
@@ -359,11 +394,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 20,
     marginBottom: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.5)',
     shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 4,
+    shadowRadius: 10,
+    overflow: 'hidden',
   },
   cardContent: {
     flex: 1,
@@ -378,17 +416,25 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 18,
     flex: 1,
+    textShadowColor: 'rgba(0, 0, 0, 0.1)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
   },
   premiumBadge: {
     backgroundColor: 'rgba(245, 158, 11, 0.2)',
     borderRadius: 12,
     padding: 4,
     marginLeft: 8,
+    borderWidth: 1,
+    borderColor: 'rgba(245, 158, 11, 0.3)',
   },
   cardDescription: {
     fontSize: 14,
     lineHeight: 20,
     marginBottom: 12,
+    textShadowColor: 'rgba(0, 0, 0, 0.05)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 1,
   },
   cardMeta: {
     flexDirection: 'row',
@@ -404,21 +450,36 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '500',
     marginLeft: 4,
+    textShadowColor: 'rgba(0, 0, 0, 0.05)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 1,
   },
   difficultyBadge: {
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.3)',
   },
   difficultyText: {
     fontSize: 10,
     fontWeight: '600',
     color: '#fff',
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
   },
   enrolledBadge: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 8,
+    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+    borderRadius: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    alignSelf: 'flex-start',
+    borderWidth: 1,
+    borderColor: 'rgba(16, 185, 129, 0.2)',
   },
   enrolledText: {
     fontSize: 12,
@@ -430,8 +491,10 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.5)',
   },
 });
