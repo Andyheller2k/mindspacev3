@@ -44,6 +44,7 @@ const sleepStories: SleepStory[] = [
     isPremium: false,
     rating: 4.8,
     plays: '2.3M',
+    
   },
   {
     id: '2',

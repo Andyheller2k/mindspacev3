@@ -1,6 +1,5 @@
 // Signup.js (refactored with two-tone layout)
 import { Ionicons } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import {
@@ -29,104 +28,94 @@ export default function Signup() {
 const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [name, setName] = useState('');
+   const [name2, setName2] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+const handleSignUp = async () => {
+  // --- 1. CONSOLIDATED VALIDATION ---
+  // We define all regex patterns and trimmed values once at the top.
 
-  const handleSignUp = async () => {
-    const nameRegex = /^[A-Za-z\s]+$/;
-const emailRegex = /^[\w.-]+@(gmail|yahoo|outlook)\.com$/i;
-const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]).{8,}$/;
+  const nameRegex = /^[A-Za-z\s]+$/;
+  const emailRegex = /^[\w.-]+@(gmail|yahoo|outlook)\.com$/i;
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]).{8,}$/;
 
+  const trimmedFirstName = name.trim();
+  const trimmedLastName = name2.trim(); // Assuming name2 is for the last name
+  const trimmedEmail = email.trim();
+  const trimmedPassword = password.trim();
+  const trimmedConfirmPassword = confirmPassword.trim();
 
-// Trimmed inputs
-const trimmedName = name.trim();
-const trimmedEmail = email.trim();
-const trimmedPassword = password.trim();
-const trimmedConfirmPassword = confirmPassword.trim();
+  // Perform all validation checks sequentially.
+  if (!trimmedFirstName || !trimmedEmail || !trimmedPassword || !trimmedConfirmPassword) {
+    Alert.alert('Error', 'Please fill in all required fields.');
+    return;
+  }
+  if (!nameRegex.test(trimmedFirstName)) {
+    Alert.alert('Invalid First Name', 'Name should contain only letters and spaces.');
+    return;
+  }
+  // Allow last name to be empty, but if it's not, validate it.
+  if (trimmedLastName && !nameRegex.test(trimmedLastName)) {
+    Alert.alert('Invalid Last Name', 'Name should contain only letters and spaces.');
+    return;
+  }
+  if (!emailRegex.test(trimmedEmail)) {
+    Alert.alert('Invalid Email', 'Only Gmail, Yahoo, or Outlook emails are allowed.');
+    return;
+  }
+  if (!passwordRegex.test(trimmedPassword)) {
+    Alert.alert('Invalid Password', 'Password must be at least 8 characters and include letters, numbers, and symbols.');
+    return;
+  }
+  if (trimmedPassword !== trimmedConfirmPassword) {
+    Alert.alert('Error', 'Passwords do not match.');
+    return;
+  }
 
-if (!trimmedName || !trimmedEmail || !trimmedPassword || !trimmedConfirmPassword) {
-  Alert.alert('Error', 'Please fill in all fields.');
-  return;
-}
+  // --- 2. API CALL WITH CORRECTED LOGIC ---
+  setIsLoading(true);
+  try {
+    // Call the backend to create the unverified user and send the email.
+    // This endpoint no longer returns a login token.
+    await api.post('/api/v1/auth/register', {
+      firstName: trimmedFirstName,
+      lastName: trimmedLastName,
+      email: trimmedEmail,
+      password: trimmedPassword,
+    });
 
-if (!nameRegex.test(trimmedName)) {
-  Alert.alert('Invalid Name', 'Name should contain only letters and spaces.');
-  return;
-}
+    // --- 3. NAVIGATE TO THE VERIFY SCREEN ---
+    // Show a success message to the user.
+    Alert.alert(
+      'Registration Successful!',
+      'We have sent a verification token to your email. Please check your inbox to complete your registration.'
+    );
 
-if (!emailRegex.test(trimmedEmail)) {
-  Alert.alert('Invalid Email', 'Only Gmail,Yahoo or Outlook emails are allowed.');
-  return;
-}
+    // Navigate the user to the new "Verify" screen.
+    // This is where they will enter the token from their email.
+    // Make sure you have a screen located at `app/verify.tsx` or similar.
+    router.push({
+      pathname: '/verify',
+      params: { email: trimmedEmail } // Pass the email to pre-fill it on the next screen
+    });
 
-if (!passwordRegex.test(trimmedPassword)) {
-  Alert.alert('Invalid Password', 'Password must be at least 8 characters and include letters, numbers, and symbols.');
-  return;
-}
-
-if (trimmedPassword !== trimmedConfirmPassword) {
-  Alert.alert('Error', 'Passwords do not match.');
-  return;
-}
-
-    if (!name.trim() || !email.trim() || !password.trim() || !confirmPassword.trim()) {
-      Alert.alert('Error', 'Please fill in all fields.');
-      return;
+  } catch (error) {
+    // --- 4. IMPROVED ERROR HANDLING ---
+    // Check if the error is a 409 Conflict from our backend (email in use).
+    if (error.response && error.response.status === 409) {
+      Alert.alert('Sign Up Failed', 'This email address is already in use.');
+    } else {
+      // Handle other potential errors (e.g., network down, server error).
+      console.error('Sign up error:', error);
+      Alert.alert('Sign Up Failed', 'An unexpected error occurred. Please try again later.');
     }
-    if (password !== confirmPassword) {
-      Alert.alert('Error', 'Passwords do not match.');
-      return;
-    }
-    
-
-if (!nameRegex.test(name.trim())) {
-  Alert.alert(
-    'Invalid Name',
-    'Name should contain only letters and spaces. No numbers or symbols allowed.'
-  );
-  return;
-}
-
-
-    const allowedEmailRegex = /^[\w.-]+@(gmail|yahoo|outlook)\.com$/i;
-
-if (!allowedEmailRegex.test(email.trim())) {
-  Alert.alert(
-    'Invalid Email',
-    'Only Gmail,Yahoo or Outlook email addresses are allowed.'
-  );
-  return;
-}
-    
-
-if (!passwordRegex.test(password)) {
-  Alert.alert(
-    'Invalid Password',
-    'Password must be at least 8 characters long and include at least one letter, one number, and one special character.'
-  );
-  return;
-}
-
-    setIsLoading(true);
-    try {
-      const response = await api.post(`/api/v1/auth/register`, {
-        firstName: name,
-        lastName: '',
-        email,
-        password,
-      });
-
-      await AsyncStorage.setItem('userToken', response.data.token);
-      router.replace('/onboarding/Welcome');
-    } catch (error) {
-      Alert.alert('Sign Up Failed', 'This email may already be in use.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
+  } finally {
+    setIsLoading(false);
+  }
+};
+  
 const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]).{8,}$/;
 
 
@@ -145,7 +134,15 @@ const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|
           <View style={styles.bottomSection}>
             <Text style={styles.title}>Create An Account</Text>
             
-            <TextInput style={styles.input} placeholder="Name" value={name} onChangeText={setName} />
+            <TextInput style={styles.input} placeholder="First Name" value={name} onChangeText={setName} />
+            {name.length > 0 && !/^[A-Za-z\s]+$/.test(name) && (
+  <Text style={{ color: 'red', fontSize: 12, marginBottom: 10 }}>
+    Name should contain only letters and spaces.
+  </Text>
+  
+)}   
+
+          <TextInput style={styles.input} placeholder="Last Name" value={name2} onChangeText={setName2} />
             {name.length > 0 && !/^[A-Za-z\s]+$/.test(name) && (
   <Text style={{ color: 'red', fontSize: 12, marginBottom: 10 }}>
     Name should contain only letters and spaces.

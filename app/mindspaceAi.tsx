@@ -4,16 +4,16 @@ import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import {
-  ActivityIndicator,
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    ActivityIndicator,
+    Alert,
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -72,6 +72,10 @@ const fetchAIResponse = async (userMessage: string) => {
         Authorization: 'Bearer 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',
         'Content-Type': 'application/json',
       },
+
+
+
+      
       body: JSON.stringify({
         model: 'qwen/qwen3-coder:free',
         messages: [

@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   subscribeBtn: {
-    backgroundColor: "#f97316",
+    backgroundColor: "#f97416ff",
     borderRadius: 16,
     padding: 18,
     alignItems: "center",

@@ -47,6 +47,75 @@ export default function Login() {
   }
 };
 
+const handleForgotPassword = () =>{
+
+  Alert.prompt(
+    'Forgot Password',
+    'Please enter the email address associated with your account.',
+    async(userEmail) =>{
+      if(!userEmail || !userEmail.trim()){
+        return;
+      }
+
+      setIsLoading(true);
+      try{
+        const response =await api.post('/api/v1/auth/forgot-password',{
+          email:userEmail,
+        });
+
+                console.log('RAW RESPONSE FROM BACKEND:', response.data); 
+
+        const responseText =
+        response.data;
+        const token = responseText.split('Token: ')[1]?.trim();
+        console.log('EXTRACTED TOKEN:',token)
+
+        Alert.prompt(
+          'Enter Reset Info',
+          `A token was generated.\n\nToken: ${token}\n\nEnter the token and your new password.`,
+          [
+            {
+              text: 'Cancel',
+              style:'cancel',
+            },
+            {
+              text: 'Submit',
+              onPress:async (textInputs) =>{
+                const [enteredToken,newPassword]= textInputs;
+
+                if (!enteredToken || !newPassword){
+                  Alert.alert('Error','Token and new password are required.');
+                  return
+                }
+
+                try{
+                  await api.post('/api/v1/auth/reset-password',{
+                    token: enteredToken,
+                    newPassword:
+                    newPassword,
+                  });
+
+                  Alert.alert('Success','Your password has been reset successfully.Please log in.');
+
+                } catch (resetError){
+                  Alert.alert('Reset Failed','The token may be invalid or expired.Please try again.')
+                }
+              }
+            }
+          ],
+          'login-password',
+          '',
+          'default'
+        );
+      }catch (error){
+        Alert.alert('Error','Could not find an account with that email address.');
+      } finally{
+        setIsLoading(false)
+      }
+    }
+  )
+}
+
 
   return (
     <KeyboardAvoidingView
@@ -79,7 +148,7 @@ export default function Login() {
               value={password}
             />
 
-            <TouchableOpacity style={styles.forgotPassword}>
+            <TouchableOpacity style={styles.forgotPassword} onPress={handleForgotPassword}>
               <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
             </TouchableOpacity>
 

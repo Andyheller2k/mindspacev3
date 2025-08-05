@@ -1,15 +1,22 @@
+import { BlurView } from 'expo-blur';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-
 import {
   FlatList,
   Image,
+  ImageBackground,
   SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+
+const images = [
+  require('../assets/images/music1.jpeg'),
+  require('../assets/images/music3.jpeg'),
+  require('../assets/images/music5.jpeg'),
+];
 
 const featuredTracks = [
   {
@@ -34,120 +41,131 @@ const featuredTracks = [
 
 const MusicScreen = () => {
   const router = useRouter();
-
   const [activeTab, setActiveTab] = useState('Featured');
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.itemRow}>
-      <Image source={item.image} style={styles.itemImage} />
-      <View>
-        <Text style={styles.itemTitle}>🔒 {item.title}</Text>
-        <Text style={styles.itemSubtitle}>
-          🎵 {item.type} · {item.duration}
-        </Text>
-      </View>
-    </TouchableOpacity>
+    <BlurView intensity={100} tint="dark" style={styles.glassmorphicItemContainer}>
+      <TouchableOpacity style={styles.itemRow}>
+        <Image source={item.image} style={styles.itemImage} />
+        <View>
+          <Text style={styles.itemTitle}>{item.title}</Text>
+          <Text style={styles.itemSubtitle}>
+            {item.type} · {item.duration}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </BlurView>
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-   
+    <ImageBackground
+      source={require('../assets/images/background.png')} // Make sure to have a background image
+      style={styles.backgroundImage}>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.header}>Music</Text>
 
-      <Text style={styles.header}>Music</Text>
-      
+        {/* Banner */}
+        <View style={styles.bannerContainer}>
+          <Image source={require('../assets/images/music2.jpeg')} style={styles.bannerImage} />
+        </View>
 
-      {/* Banner */}
-      <View style={styles.bannerContainer}>
-        <Image source={require('../assets/images/music2.jpeg')} style={styles.bannerImage} />
-      </View>
+        {/* Featured Info with Glassmorphism */}
+        <BlurView intensity={100} tint="dark" style={styles.glassmorphicContainer}>
+          <View style={styles.featuredBlock}>
+            <Text style={styles.featuredLabel}>Featured</Text>
+            <Text style={styles.featuredTitle}>Guide to Meditation</Text>
+            <Text style={styles.featuredSubtitle}>🎵 Focus Music · 135 min</Text>
+            <TouchableOpacity style={styles.playButton}>
+              <Text style={styles.playText}>Play Now</Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
 
-      {/* Featured Info */}
-      <View style={styles.featuredBlock}>
-        <Text style={styles.featuredLabel}>Featured</Text>
-        <Text style={styles.featuredTitle}>Guide to Meditation</Text>
-        <Text style={styles.featuredSubtitle}>🎵 Focus Music · 135 min</Text>
-        <TouchableOpacity style={styles.playButton}>
-          <Text style={styles.playText}>🔒 Play</Text>
+        {/* Tabs */}
+        <View style={styles.tabContainer}>
+          <Text
+            onPress={() => setActiveTab('Recent')}
+            style={[styles.tabText, activeTab === 'Recent' && styles.activeTab]}>
+            Recent
+          </Text>
+          <Text
+            onPress={() => setActiveTab('Featured')}
+            style={[styles.tabText, activeTab === 'Featured' && styles.activeTab]}>
+            Featured
+          </Text>
+        </View>
+
+        {/* List */}
+        <FlatList
+          data={featuredTracks}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
+          contentContainerStyle={{ paddingBottom: 80 }}
+        />
+        <TouchableOpacity onPress={() => router.back()} style={{ marginTop: 20 }}>
+          <Text style={{ color: 'yellow', fontSize: 50 }}>←</Text>
         </TouchableOpacity>
-      </View>
-
-      {/* Tabs */}
-      <View style={styles.tabContainer}>
-        <Text
-          onPress={() => setActiveTab('Recent')}
-          style={[styles.tabText, activeTab === 'Recent' && styles.inactiveTab]}>
-          Recent
-        </Text>
-        <Text
-          onPress={() => setActiveTab('Featured')}
-          style={[styles.tabText, activeTab === 'Featured' && styles.activeTab]}>
-          Featured
-        </Text>
-      </View>
-
-      {/* List */}
-      <FlatList
-        data={featuredTracks}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-        contentContainerStyle={{ paddingBottom: 80 }}
-      />
-           <TouchableOpacity onPress={() => router.back()} style={{ marginTop: 20 }}>
-  <Text style={{ color: 'yellow', fontSize: 50 }}>←</Text>
-</TouchableOpacity>
-      
-    </SafeAreaView>
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#0D0D2B',
     paddingHorizontal: 16,
+    backgroundColor: 'rgba(0,0,0,0.3)', // Semi-transparent overlay
   },
   header: {
-    fontSize: 18,
-    fontWeight: '600',
+    fontSize: 28,
+    fontWeight: 'bold',
     color: 'white',
     marginTop: 50,
-    marginBottom: 8,
+    marginBottom: 20,
+    textAlign: 'center',
   },
   bannerContainer: {
-    backgroundColor: '#FCD32D',
-    borderBottomLeftRadius: 20,
-    borderTopLeftRadius:20,
-    borderTopRightRadius:20,
-    borderBottomRightRadius: 20,
     alignItems: 'center',
-    paddingVertical: 24,
+    marginBottom: 20,
   },
   bannerImage: {
     width: 160,
     height: 160,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
+    borderRadius: 80,
   },
-  featuredBlock: {
-    marginTop: 20,
+  glassmorphicContainer: {
+    borderRadius: 20,
+    overflow: 'hidden', // This is important for borderRadius to work on Android
+    borderColor: 'rgba(255, 255, 255, 0.2)',
+    borderWidth: 1,
     marginBottom: 20,
   },
+  featuredBlock: {
+    padding: 20,
+  },
   featuredLabel: {
-    color: '#999',
+    color: '#ccc',
     fontSize: 12,
+    fontWeight: '600',
     marginBottom: 4,
+    textTransform: 'uppercase',
   },
   featuredTitle: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
   },
   featuredSubtitle: {
-    color: '#999',
+    color: '#ddd',
     fontSize: 14,
-    marginVertical: 4,
+    marginVertical: 8,
   },
   playButton: {
-    backgroundColor: '#2979FF',
+    backgroundColor: 'rgba(252, 211, 45, 0.8)',
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 25,
@@ -155,64 +173,54 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   playText: {
-    color: 'white',
-    fontWeight: '600',
+    color: '#0D0D2B',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
   tabContainer: {
     flexDirection: 'row',
-    marginBottom: 10,
+    marginBottom: 20,
+    justifyContent: 'center',
   },
   tabText: {
-    marginRight: 24,
+    marginHorizontal: 16,
     fontSize: 16,
     color: '#aaa',
+    fontWeight: '500',
   },
   activeTab: {
     color: 'white',
-    textDecorationLine: 'underline',
+    fontWeight: 'bold',
+    borderBottomColor: 'rgba(252, 211, 45, 0.8)',
+    borderBottomWidth: 2,
   },
-  inactiveTab: {
-    color: '#555',
+  glassmorphicItemContainer: {
+    borderRadius: 15,
+    overflow: 'hidden',
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderWidth: 1,
+    marginBottom: 16,
   },
   itemRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
+    padding: 12,
   },
   itemImage: {
     width: 60,
     height: 60,
     borderRadius: 10,
-    marginRight: 12,
+    marginRight: 16,
   },
   itemTitle: {
     color: 'white',
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '600',
   },
   itemSubtitle: {
-    color: '#aaa',
+    color: '#ccc',
     fontSize: 12,
-    marginTop: 2,
-  },
-  bottomNav: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    borderTopColor: '#222',
-    borderTopWidth: 1,
-    paddingVertical: 10,
-    backgroundColor: '#0D0D2B',
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-  },
-  navItem: {
-    color: '#888',
-    fontSize: 12,
-  },
-  navActive: {
-    color: 'white',
-    fontWeight: '600',
+    marginTop: 4,
   },
 });
 
