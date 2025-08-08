@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
@@ -24,6 +25,8 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword,setShowPassword] = useState(false);
+
 
   const handleLogin = async () => {
   if (!email.trim() || !password.trim()) {
@@ -140,17 +143,28 @@ const handleForgotPassword = () =>{
               value={email}
               keyboardType="email-address"
             />
+            <View style = {styles.passwordContainer}>
+
             <TextInput
-              style={styles.input}
+              style={[styles.input,{flex: 1, marginBottom:0}]}
               placeholder="Password"
-              secureTextEntry
+              secureTextEntry={!showPassword}
               onChangeText={setPassword}
               value={password}
             />
+            
 
-            <TouchableOpacity style={styles.forgotPassword} onPress={handleForgotPassword}>
-              <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+            <TouchableOpacity onPress={()=>setShowPassword(!showPassword)}
+            style={styles.eyeIcon}
+            >
+              <Ionicons
+              name={showPassword ? 'eye-off' : 'eye'}
+              size= {22}
+              color="#000033"
+              />
+
             </TouchableOpacity>
+            </View>
 
             {isLoading ? (
               <ActivityIndicator size="large" color="#007AFF" />
@@ -245,4 +259,16 @@ const styles = StyleSheet.create({
     color: '#FFD700',
     fontWeight: 'bold',
   },
+
+  passwordContainer:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius:20,
+    marginBottom: 15,
+  },
+
+  eyeIcon:{
+    paddingHorizontal:15,
+  }
 });
